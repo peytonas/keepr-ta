@@ -19,7 +19,9 @@ export default new Vuex.Store({
     user: {},
     keep: {},
     keeps: [],
-    userKeeps: []
+    userKeeps: [],
+    vault: {},
+    vaults: [],
   },
   mutations: {
     setUser(state, user) {
@@ -34,6 +36,12 @@ export default new Vuex.Store({
     },
     setUserKeeps(state, payload) {
       state.userKeeps = payload
+    },
+    setVault(state, payload) {
+      state.vault = payload
+    },
+    setVaults(state, payload) {
+      state.vaults = payload
     }
   },
   actions: {
@@ -67,9 +75,17 @@ export default new Vuex.Store({
     },
     async createKeep({ commit, dispatch }, payload) {
       try {
-        let res = await api.post("keeps", payload)
+        await api.post("keeps", payload)
         dispatch("getKeeps")
         dispatch("getUserKeeps")
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteKeep({ commit, dispatch }, payload) {
+      try {
+        await api.delete(`keeps/${payload}`)
+        dispatch("getKeeps")
       } catch (error) {
         console.error(error)
       }
@@ -90,13 +106,37 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async deleteKeep({ commit, dispatch }, payload) {
+    async createVault({ commit, dispatch }, payload) {
       try {
-        let res = await api.delete(`keeps/${payload}`)
-        dispatch("getKeeps")
+        let res = await api.post("vaults", payload)
+        dispatch("getVaults")
       } catch (error) {
         console.error(error)
       }
     },
+    async getVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.get(`vaults/${payload}`)
+        commit("setVault", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getVaults({ commit, dispatch }) {
+      try {
+        let res = await api.get(`vaults`)
+        commit('setVaults', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete(`vaults/${payload}`)
+        dispatch("getVaults")
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 })

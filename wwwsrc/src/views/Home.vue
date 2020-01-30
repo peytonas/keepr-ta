@@ -24,7 +24,7 @@
         </button>
       </div>
     </div>
-    <div class="row justify-content-left mt-2 mb-2">
+    <div class="row justify-content-left mt-2 mb-2 ml-n3 mr-1">
       <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>

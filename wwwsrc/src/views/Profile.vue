@@ -17,36 +17,29 @@
           data-target="#create-keep-modal"
         >NEW KEEP</button>
       </div>
-      <!-- <div class="col-2">
+      <div class="col-2">
         <CreateVaultModal />
         <button
           class="btn btn-primary mb-2"
           data-toggle="modal"
           data-target="#create-vault-modal"
         >NEW VAULT</button>
-      </div>-->
-    </div>
-    <div class="row justify-content-around">
-      <Keeps class="col-3 mb-2" v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
-    </div>
-    <div class="row justify-content-around">
-      <div class="border border-dark rounded row justify-content-around mb-2">
-        <!-- <Vaults
-          class="col mb-2 ml-1 mr-1"
-          v-for="vault in vaults"
-          :vaultProp="vault"
-          :key="vault._id"
-        />-->
       </div>
+    </div>
+    <div class="row justify-content-left mt-2 mb-2 ml-n3 mr-1">
+      <Keeps v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
+    </div>
+    <div class="row justify-content-left border rounded border-dark mb-2 ml-1 mr-1">
+      <Vaults class="col-1" v-for="vault in vaults" :vaultProp="vault" :key="vault._id" />
     </div>
   </div>
 </template>
 <script>
 import Auth from "../AuthService";
 import Keeps from "../Components/Keeps";
-// import Vaults from "../Components/Vaults";
+import Vaults from "../Components/Vaults";
 import CreateKeepModal from "../Components/CreateKeepModal";
-// import CreateVaultModal from "../Components/CreateVaultModal";
+import CreateVaultModal from "../Components/CreateVaultModal";
 export default {
   name: "profile",
   data() {
@@ -54,7 +47,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getUserKeeps");
-    // this.$store.dispatch("getVaults");
+    this.$store.dispatch("getVaults");
   },
   computed: {
     user() {
@@ -62,10 +55,10 @@ export default {
     },
     userKeeps() {
       return this.$store.state.userKeeps;
+    },
+    vaults() {
+      return this.$store.state.vaults;
     }
-    // vaults() {
-    //   return this.$store.state.vaults;
-    // }
   },
   methods: {
     goHome() {
@@ -74,9 +67,9 @@ export default {
   },
   components: {
     Keeps,
-    // Vaults,
-    CreateKeepModal
-    // CreateVaultModal
+    Vaults,
+    CreateKeepModal,
+    CreateVaultModal
   }
 };
 </script>

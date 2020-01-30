@@ -1,9 +1,9 @@
 <template>
-  <div id="create-keep-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div id="create-vault-modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">NEW KEEP</h5>
+          <h5 class="modal-title">NEW VAULT</h5>
           <button
             type="button"
             class="close btn btn-danger"
@@ -14,26 +14,18 @@
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createKeep">
+          <audio id="oof">
+            <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
+          </audio>
+          <form @submit.prevent="createVault">
             <div class="form-group">
               <label for="name">NAME</label>
               <input
                 type="text"
                 class="form-control"
-                id="keepName"
+                id="vaultName"
                 placeholder="Enter name"
-                v-model="newKeep.name"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="imgurl">IMAGE URL</label>
-              <input
-                type="text"
-                class="form-control"
-                id="keepImg"
-                placeholder="Enter imgurl"
-                v-model="newKeep.img"
+                v-model="newVault.name"
                 required
               />
             </div>
@@ -42,16 +34,16 @@
               <input
                 type="text"
                 class="form-control"
-                id="keepDescription"
+                id="vaultDescription"
                 placeholder="Enter description"
-                v-model="newKeep.description"
+                v-model="newVault.description"
                 required
               />
             </div>
             <audio id="kaching">
               <source src="../assets/ka-ching.mp3" type="audio/mpeg" />
             </audio>
-            <button type="submit" class="btn btn-primary">CREATE KEEP</button>
+            <button type="submit" class="btn btn-primary">CREATE VAULT</button>
           </form>
         </div>
       </div>
@@ -61,15 +53,15 @@
 <script>
 import swal from "sweetalert2";
 export default {
-  name: "CreateKeepModal",
+  name: "create-vault-modal",
   data() {
     return {
-      newKeep: {}
+      newVault: {}
     };
   },
   computed: {},
   methods: {
-    createKeep() {
+    createVault() {
       let money = document.getElementById("kaching");
       const toast = swal.mixin({
         toast: true,
@@ -81,14 +73,14 @@ export default {
       money.play();
       setTimeout(() => {
         toast.fire("it's alive!", "", "success");
-        this.$store.dispatch("createKeep", this.newKeep);
-        this.newKeep = {};
+        this.$store.dispatch("createVault", this.newVault);
+        this.newVault = {};
         this.modalClose();
       }, 500);
     },
     modalClose() {
       setTimeout(function() {
-        $("#create-keep-modal").modal("hide");
+        $("#create-vault-modal").modal("hide");
       }, 500);
     }
   },
