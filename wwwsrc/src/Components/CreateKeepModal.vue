@@ -77,27 +77,19 @@ export default {
         showConfirmButton: false,
         timer: 2000
       });
-      swal
-        .fire({
-          title: "Confirm creation?",
-          text: "You can just delete it later anyway...",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Do it."
-        })
-        .then(result => {
-          if (result.value) {
-            //put the sound below
-            money.play();
-            setTimeout(() => {
-              toast.fire("it's alive!", "", "success");
-              this.$store.dispatch("createKeep", this.newKeep);
-              this.newKeep = {};
-            }, 500);
-          }
-        });
+      //put the sound below
+      money.play();
+      setTimeout(() => {
+        toast.fire("it's alive!", "", "success");
+        this.$store.dispatch("createKeep", this.newKeep);
+        this.newKeep = {};
+        this.modalClose();
+      }, 500);
+    },
+    modalClose() {
+      setTimeout(function() {
+        $("#create-keep-modal").modal("hide");
+      }, 500);
     }
   },
   components: {}

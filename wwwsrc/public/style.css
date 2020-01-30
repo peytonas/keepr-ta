@@ -3,9 +3,9 @@
   height: auto;
 }
 .grid {
-  background-image: linear-gradient(rgb(214, 0, 0), white);
+  background: linear-gradient(rgb(214, 0, 0), white);
   text-align: center;
-  height: 1000px;
+  height: auto;
   padding-left: 15px;
   padding-right: 15px;
   background-attachment: fixed;
