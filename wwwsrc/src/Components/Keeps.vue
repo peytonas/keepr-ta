@@ -1,14 +1,18 @@
 <template>
-  <div class="userKeeps allKeeps vaultKeeps loginKeeps col-2">
-    <p>{{keepProp.name}}</p>
+  <div class="userKeeps allKeeps vaultKeeps loginKeeps col-2 mt-2 mb-2">
+    <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" />
     <p>{{keepProp.description}}</p>
     <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.vaulted}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
-    <div class="row justify-content-center">
-      <button class="btn btn-danger" @click.prevent="deleteKeep">
+    <div class="row justify-content-center" v-if="this.$route.name != 'login'">
+      <button
+        class="btn btn-danger"
+        @click.prevent="deleteKeep"
+        v-if="user.id == this.keepProp.userId"
+      >
         <i class="fas fa-dumpster-fire"></i>
       </button>
       <div class="dropdown">
@@ -44,7 +48,7 @@ import swal from "sweetalert2";
 // import Vaults from "../Components/Vaults";
 // import ViewKeepModal from "../Components/ViewKeepModal";
 export default {
-  name: "keeps",
+  name: "Keeps",
   props: ["keepProp"],
   data() {
     return {
@@ -52,6 +56,9 @@ export default {
     };
   },
   computed: {
+    user() {
+      return this.$store.state.user;
+    }
     // vaults() {
     //   return this.$store.state.vaults;
     // }

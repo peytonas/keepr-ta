@@ -19,6 +19,7 @@ export default new Vuex.Store({
     user: {},
     keep: {},
     keeps: [],
+    userKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     setKeeps(state, payload) {
       state.keeps = payload
     },
+    setUserKeeps(state, payload) {
+      state.userKeeps = payload
+    }
   },
   actions: {
     async register({ commit, dispatch }, creds) {
@@ -65,7 +69,7 @@ export default new Vuex.Store({
       try {
         let res = await api.post("keeps", payload)
         dispatch("getKeeps")
-        // dispatch("getUserKeeps")
+        dispatch("getUserKeeps")
       } catch (error) {
         console.error(error)
       }
@@ -74,6 +78,14 @@ export default new Vuex.Store({
       try {
         let res = await api.get(`keeps`)
         commit('setKeeps', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getUserKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get(`keeps/user`)
+        commit('setUserKeeps', res.data)
       } catch (error) {
         console.error(error)
       }

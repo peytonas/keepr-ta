@@ -1,9 +1,14 @@
 <template>
   <div class="home container-fluid">
-    <div class="row">
+    <div class="row justify-content-between">
       <div class="col-1 mt-2 ml-n2">
         <button class="btn btn-success" v-if="user.id" @click="logout">Logout</button>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
+      </div>
+      <div class="col-1 mt-1">
+        <button class="btn btn-warning mt-1" @click="goProfile">
+          <i class="far fa-caret-square-right text-white"></i>
+        </button>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -19,7 +24,7 @@
         </button>
       </div>
     </div>
-    <div class="row justify-content-left">
+    <div class="row justify-content-left mt-2 mb-2">
       <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>
@@ -66,6 +71,9 @@ export default {
             toast.fire("logged out!", "", "success");
           }
         });
+    },
+    goProfile() {
+      this.$router.push("profile");
     }
   },
   components: {

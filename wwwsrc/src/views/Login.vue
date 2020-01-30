@@ -15,12 +15,19 @@
       <p v-if="loginForm">No account? Click here to Register</p>
       <p v-else>Already have an account? Click to Login</p>
     </div>
+    <div class="row justify-content-left mt-2 mb-2">
+      <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
+    </div>
   </div>
 </template>
 
 <script>
+import Keeps from "../Components/Keeps";
 export default {
   name: "login",
+  mounted() {
+    this.$store.dispatch("getKeeps");
+  },
   data() {
     return {
       loginForm: true,
@@ -35,7 +42,11 @@ export default {
       }
     };
   },
-
+  computed: {
+    keeps() {
+      return this.$store.state.keeps;
+    }
+  },
   beforeCreate() {
     if (this.$store.state.user.id) {
       this.$router.push({ name: "home" });
@@ -48,6 +59,7 @@ export default {
     loginUser() {
       this.$store.dispatch("login", this.creds);
     }
-  }
+  },
+  components: { Keeps }
 };
 </script>
