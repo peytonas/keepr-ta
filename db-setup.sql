@@ -1,3 +1,4 @@
+USE keepr2020;
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     username VARCHAR(255) NOT NULL,
@@ -27,8 +28,8 @@
 --     img VARCHAR(255),
 --     isPrivate TINYINT,
 --     views INT DEFAULT 0,
---     shares INT DEFAULT 0,
 --     keeps INT DEFAULT 0,
+--     vaulted TINYINT,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)

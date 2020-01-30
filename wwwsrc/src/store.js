@@ -6,11 +6,11 @@ import AuthService from './AuthService'
 
 Vue.use(Vuex)
 
-let baseUrl = location.host.includes('localhost') ? '//localhost:5000/' : '/'
+let baseUrl = location.host.includes('localhost') ? 'https://localhost:5001/' : '/'
 
 let api = Axios.create({
   baseURL: baseUrl + "api/",
-  timeout: 3000,
+  timeout: 5000,
   withCredentials: true
 })
 
@@ -54,6 +54,15 @@ export default new Vuex.Store({
         router.push({ name: "login" })
       } catch (e) {
         console.warn(e.message)
+      }
+    },
+    async createKeep({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("keeps", payload)
+        // dispatch("getKeeps")
+        // dispatch("getUserKeeps")
+      } catch (error) {
+        console.error(error)
       }
     }
   }
