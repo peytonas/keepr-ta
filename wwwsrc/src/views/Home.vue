@@ -19,18 +19,28 @@
         </button>
       </div>
     </div>
+    <div class="row justify-content-left">
+      <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
+    </div>
   </div>
 </template>
 
 <script>
 import swal from "sweetalert2";
 import Auth from "../AuthService";
+import Keeps from "../Components/Keeps";
 import CreateKeepModal from "../Components/CreateKeepModal";
 export default {
   name: "home",
+  mounted() {
+    this.$store.dispatch("getKeeps");
+  },
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    keeps() {
+      return this.$store.state.keeps;
     }
   },
   methods: {
@@ -59,6 +69,7 @@ export default {
     }
   },
   components: {
+    Keeps,
     CreateKeepModal
   }
 };

@@ -1,0 +1,107 @@
+<template>
+  <div class="userKeeps allKeeps vaultKeeps loginKeeps col-2">
+    <p>{{keepProp.name}}</p>
+    <img class="keep bg-dark" :src="keepProp.img" />
+    <p>{{keepProp.description}}</p>
+    <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.vaulted}}</p>
+    <audio id="oof">
+      <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="row justify-content-center">
+      <button class="btn btn-danger" @click.prevent="deleteKeep">
+        <i class="fas fa-dumpster-fire"></i>
+      </button>
+      <div class="dropdown">
+        <button
+          class="btn btn-warning mr-1 ml-1"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-dungeon text-white"></i>
+        </button>
+        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li
+              class="dropdown-item"
+              v-for="vault in vaults"
+              v-bind:key="vault.id"
+              @click="addToVault(vault.id)"
+            >{{vault.name}}</li>
+        </div>-->
+      </div>
+      <div>
+        <button class="btn btn-success" @click.prevent="viewKeep()">
+          <i class="far fa-eye text-white"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import swal from "sweetalert2";
+// import Vaults from "../Components/Vaults";
+// import ViewKeepModal from "../Components/ViewKeepModal";
+export default {
+  name: "keeps",
+  props: ["keepProp"],
+  data() {
+    return {
+      // vaultsImport: Vaults
+    };
+  },
+  computed: {
+    // vaults() {
+    //   return this.$store.state.vaults;
+    // }
+  },
+  mounted() {},
+  methods: {
+    // addToVault(vaultId) {
+    //   let payload = {
+    //     keepId: this.keepProp.id,
+    //     vaultId: vaultId
+    //   };
+    //   this.keepProp.vaulted, this.$store.dispatch("addToVault", payload);
+    // },
+    // viewKeep() {
+    //   this.$store.dispatch("viewCounts", {
+    //     keepId: this.keepProp.id,
+    //     views: (this.keepProp.views += 1),
+    //     vaulted: this.keepProp.vaulted
+    //   });
+    // },
+    deleteKeep() {
+      let roblox = document.getElementById("oof");
+      const toast = swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000
+      });
+      swal
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to get it back...",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Do it."
+        })
+        .then(result => {
+          if (result.value) {
+            //NOTE put the sound below .
+            roblox.play();
+            setTimeout(() => {
+              toast.fire("it's gone jim!", "", "success");
+              this.$store.dispatch("deleteKeep", this.keepProp.id);
+            }, 500);
+          }
+        });
+    }
+  }
+  // components: { Vaults, ViewKeepModal }
+};
+</script>

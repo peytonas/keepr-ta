@@ -16,7 +16,9 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    keep: {},
+    keeps: [],
   },
   mutations: {
     setUser(state, user) {
@@ -25,7 +27,10 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
-    }
+    },
+    setKeeps(state, payload) {
+      state.keeps = payload
+    },
   },
   actions: {
     async register({ commit, dispatch }, creds) {
@@ -59,11 +64,27 @@ export default new Vuex.Store({
     async createKeep({ commit, dispatch }, payload) {
       try {
         let res = await api.post("keeps", payload)
-        // dispatch("getKeeps")
+        dispatch("getKeeps")
         // dispatch("getUserKeeps")
       } catch (error) {
         console.error(error)
       }
-    }
+    },
+    async getKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get(`keeps`)
+        commit('setKeeps', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteKeep({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete(`keeps/${payload}`)
+        dispatch("getUserKeeps")
+      } catch (error) {
+        console.error(error)
+      }
+    },
   }
 })

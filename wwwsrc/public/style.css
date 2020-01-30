@@ -1,0 +1,24 @@
+.grid-item {
+  width: auto;
+  height: auto;
+}
+.grid {
+  background-image: linear-gradient(rgb(214, 0, 0), white);
+  text-align: center;
+  height: 1000px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.keep {
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 5px;
+  border-radius: 8px;
+  width: 200px;
+  height: auto;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
