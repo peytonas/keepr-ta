@@ -36,7 +36,6 @@ USE keepr2020;
 --         ON DELETE CASCADE,  
 --     PRIMARY KEY (id)
 -- );
-
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
 --     vaultId int NOT NULL,

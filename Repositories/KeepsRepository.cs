@@ -37,15 +37,10 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM keeps WHERE id = @id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
-    public void Edit(Keep keep)
+    public void Edit(Keep newKeep)
     {
-      string sql = @"
-        UPDATE keeps
-        SET
-            views = @Views
-            vaulted = @Vaulted
-        WHERE id = @Id";
-      _db.Execute(sql, keep);
+      string sql = "UPDATE keeps SET views = @Views, keeps = @Keeps, vaulted = @Vaulted WHERE id = @Id";
+      _db.Execute(sql, newKeep);
     }
     public void Delete(int id, string userId)
     {

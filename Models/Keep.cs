@@ -10,6 +10,6 @@ namespace Keepr.Models
     public bool IsPrivate { get; set; }
     public int Views { get; set; }
     public int Keeps { get; set; }
-    public int Vaulted { get; set; }
+    public bool Vaulted { get; set; }
   }
 }

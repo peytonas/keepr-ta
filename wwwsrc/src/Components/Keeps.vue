@@ -3,7 +3,7 @@
     <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" />
     <p>{{keepProp.description}}</p>
-    <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.vaulted}}</p>
+    <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
@@ -26,17 +26,17 @@
         >
           <i class="fas fa-dungeon text-white"></i>
         </button>
-        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li
-              class="dropdown-item"
-              v-for="vault in vaults"
-              v-bind:key="vault.id"
-              @click="addToVault(vault.id)"
-            >{{vault.name}}</li>
-        </div>-->
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li
+            class="dropdown-item"
+            v-for="vault in vaults"
+            v-bind:key="vault.id"
+            @click="addToVault(vault.id)"
+          >{{vault.name}}</li>
+        </div>
       </div>
       <div>
-        <button class="btn btn-success" @click.prevent="viewKeep()">
+        <button class="btn btn-success" @click.prevent="viewKeep">
           <i class="far fa-eye text-white"></i>
         </button>
       </div>
@@ -45,33 +45,35 @@
 </template>
 <script>
 import swal from "sweetalert2";
-// import Vaults from "../Components/Vaults";
 // import ViewKeepModal from "../Components/ViewKeepModal";
 export default {
   name: "Keeps",
   props: ["keepProp"],
   data() {
-    return {
-      // vaultsImport: Vaults
-    };
+    return {};
   },
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    vaults() {
+      return this.$store.state.vaults;
     }
-    // vaults() {
-    //   return this.$store.state.vaults;
-    // }
   },
   mounted() {},
   methods: {
-    // addToVault(vaultId) {
-    //   let payload = {
-    //     keepId: this.keepProp.id,
-    //     vaultId: vaultId
-    //   };
-    //   this.keepProp.vaulted, this.$store.dispatch("addToVault", payload);
-    // },
+    addToVault(vaultId) {
+      this.$store.dispatch("storeKeep", {
+        keepId: this.keepProp.id,
+        vaultId: vaultId
+      });
+      this.$store.dispatch("addToVault", {
+        id: this.keepProp.id,
+        keeps: this.keepProp.keeps + 1,
+        views: this.keepProp.views,
+        vaulted: this.keepProp.vaulted == true
+      });
+    },
     // viewKeep() {
     //   this.$store.dispatch("viewCounts", {
     //     keepId: this.keepProp.id,
@@ -109,6 +111,5 @@ export default {
         });
     }
   }
-  // components: { Vaults, ViewKeepModal }
 };
 </script>

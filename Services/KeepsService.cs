@@ -34,13 +34,14 @@ namespace Keepr.Services
       if (exists == null) { throw new Exception("doesn't exist broh"); }
       return exists;
     }
-    public Keep Edit(Keep editKeep)
+    public Keep Edit(Keep newKeep)
     {
-      Keep keep = _repo.Get(editKeep.Id);
-      if (keep == null) { throw new Exception("doesn't exist broh"); }
-      keep.Views = editKeep.Views;
-      _repo.Edit(keep);
-      return keep;
+      Keep exists = _repo.Get(newKeep.Id);
+      if (exists == null) { throw new Exception("doesn't exist broh"); }
+      exists.Views = newKeep.Views;
+      exists.Keeps = newKeep.Keeps;
+      _repo.Edit(exists);
+      return exists;
     }
     public string Delete(int id, string userId)
     {

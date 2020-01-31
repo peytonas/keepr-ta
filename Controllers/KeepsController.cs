@@ -71,16 +71,17 @@ namespace keepr.Controllers
     }
     [Authorize]
     [HttpPut("{id}")]
-    public ActionResult<Keep> Edit([FromBody] Keep editKeep, int id)
+    public ActionResult<Keep> Edit([FromBody] Keep newKeep, int id)
     {
       try
       {
-        editKeep.Id = id;
-        return Ok(_ks.Edit(editKeep));
+        newKeep.Id = id;
+        newKeep.UserId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_ks.Edit(newKeep));
       }
       catch (Exception e)
       {
-        return BadRequest(e.Message);
+        return Unauthorized(e.Message);
       }
     }
     [Authorize]

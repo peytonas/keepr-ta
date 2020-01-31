@@ -29,7 +29,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import swal from "sweetalert2";
 import Auth from "../AuthService";

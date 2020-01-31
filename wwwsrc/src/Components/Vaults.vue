@@ -28,7 +28,6 @@ export default {
     //   });
     //   // this.$store.dispatch("getVaultKeep");
     // },
-    //SECTION delete vault works .
     deleteVault() {
       let roblox = document.getElementById("oof");
       const toast = swal.mixin({
@@ -58,7 +57,6 @@ export default {
           }
         });
     }
-    //!SECTION
   },
   components: {}
 };

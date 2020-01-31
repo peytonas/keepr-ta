@@ -22,14 +22,17 @@ export default new Vuex.Store({
     userKeeps: [],
     vault: {},
     vaults: [],
+    vaultKeep: {}
   },
   mutations: {
     setUser(state, user) {
       state.user = user
     },
     resetState(state) {
-      //clear the entire state object of user data
       state.user = {}
+    },
+    setKeep(state, payload) {
+      state.keep = payload
     },
     setKeeps(state, payload) {
       state.keeps = payload
@@ -42,6 +45,9 @@ export default new Vuex.Store({
     },
     setVaults(state, payload) {
       state.vaults = payload
+    },
+    setVaultKeep(state, payload) {
+      state.vaultKeep = payload
     }
   },
   actions: {
@@ -82,10 +88,19 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async deleteKeep({ commit, dispatch }, payload) {
+    async deleteKeep({ commit, dispatch }, keepId) {
       try {
-        await api.delete(`keeps/${payload}`)
+        await api.delete(`keeps/${keepId}`)
         dispatch("getKeeps")
+        dispatch("getUserKeeps")
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async editKeep({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put(`keeps/${payload.keepId}`, payload)
+        commit("setKeep", res.data)
       } catch (error) {
         console.error(error)
       }
@@ -114,9 +129,9 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async getVault({ commit, dispatch }, payload) {
+    async getVault({ commit, dispatch }, vaultId) {
       try {
-        let res = await api.get(`vaults/${payload}`)
+        let res = await api.get(`vaults/${vaultId}`)
         commit("setVault", res.data)
       } catch (error) {
         console.error(error)
@@ -130,13 +145,30 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async deleteVault({ commit, dispatch }, payload) {
+    async deleteVault({ commit, dispatch }, vaultId) {
       try {
-        let res = await api.delete(`vaults/${payload}`)
+        let res = await api.delete(`vaults/${vaultId}`)
         dispatch("getVaults")
       } catch (error) {
         console.error(error)
       }
-    }
+    },
+    async addToVault({ commit, dispatch }, payload) {
+      try {
+        await api.put('keeps/' + payload.id, payload)
+        dispatch("getKeeps")
+        dispatch("getUserKeeps")
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async storeKeep({ commit, dispatch }, payload) {
+      try {
+        await api.post('vaultkeeps', payload)
+        await api.get('keeps/' + payload.keepId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
   }
 })
