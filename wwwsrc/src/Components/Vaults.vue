@@ -3,7 +3,7 @@
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
-    <button class="btn border-dark rounded mt-1">{{vaultProp.name}}</button>
+    <button class="btn border-dark rounded mt-1" @click="goVault">{{vaultProp.name}}</button>
     <div class="row justify-content-center mt-1">
       <button class="btn btn-danger mb-1" @click.prevent="deleteVault">
         <i class="fas fa-dumpster-fire"></i>
@@ -21,13 +21,13 @@ export default {
   },
   computed: {},
   methods: {
-    // goVault() {
-    //   this.$router.push({
-    //     name: "vaultkeeps",
-    //     params: { vaultId: this.vaultProp.id }
-    //   });
-    //   // this.$store.dispatch("getVaultKeep");
-    // },
+    goVault() {
+      this.$router.push({
+        name: "vaultKeeps",
+        params: { vaultId: this.vaultProp.id }
+      });
+      this.$store.dispatch("getVault", this.vaultProp.id);
+    },
     deleteVault() {
       let roblox = document.getElementById("oof");
       const toast = swal.mixin({

@@ -39,6 +39,13 @@
         <button class="btn btn-success" @click.prevent="viewKeep">
           <i class="far fa-eye text-white"></i>
         </button>
+        <button
+          class="btn btn-danger ml-1"
+          @click.prevent="removeKeep"
+          v-if="this.$route.name == 'vaultKeeps'"
+        >
+          <i class="fas fa-minus-circle"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -107,6 +114,26 @@ export default {
               toast.fire("it's gone jim!", "", "success");
               this.$store.dispatch("deleteKeep", this.keepProp.id);
             }, 500);
+          }
+        });
+    },
+    removeKeep() {
+      swal
+        .fire({
+          title: "Are you sure?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes!"
+        })
+        .then(result => {
+          if (result.value) {
+            this.keepProp.keeps - 1;
+            this.$store.dispatch("removeKeep", {
+              keepId: this.keepProp.id,
+              vaultId: parseInt(this.$route.params.vaultId)
+            });
           }
         });
     }

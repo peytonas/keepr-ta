@@ -123,7 +123,7 @@ export default new Vuex.Store({
     },
     async createVault({ commit, dispatch }, payload) {
       try {
-        let res = await api.post("vaults", payload)
+        await api.post("vaults", payload)
         dispatch("getVaults")
       } catch (error) {
         console.error(error)
@@ -133,6 +133,7 @@ export default new Vuex.Store({
       try {
         let res = await api.get(`vaults/${vaultId}`)
         commit("setVault", res.data)
+        dispatch('getVaultKeeps', vaultId)
       } catch (error) {
         console.error(error)
       }
@@ -145,9 +146,17 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async getVaultKeeps({ commit, dispatch }, payload) {
+      try {
+        let res = await api.get('vaultkeeps/' + payload)
+        commit('setKeeps', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async deleteVault({ commit, dispatch }, vaultId) {
       try {
-        let res = await api.delete(`vaults/${vaultId}`)
+        await api.delete(`vaults/${vaultId}`)
         dispatch("getVaults")
       } catch (error) {
         console.error(error)
@@ -170,5 +179,13 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async removeKeep({ commit, dispatch }, payload) {
+      try {
+        await api.put('vaultkeeps', payload)
+        dispatch("getVault", payload.vaultId)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 })
