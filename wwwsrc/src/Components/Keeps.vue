@@ -129,7 +129,6 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            this.keepProp.keeps - 1;
             this.$store.dispatch("removeKeep", {
               keepId: this.keepProp.id,
               vaultId: parseInt(this.$route.params.vaultId)
