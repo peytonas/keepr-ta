@@ -3,11 +3,10 @@
   height: auto;
 }
 .grid {
-  background: linear-gradient(rgb(214, 0, 0), white);
+  background: linear-gradient(rgb(255, 0, 0), white);
   text-align: center;
   height: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  min-height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

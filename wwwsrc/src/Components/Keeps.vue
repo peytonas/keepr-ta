@@ -1,5 +1,5 @@
 <template>
-  <div class="userKeeps allKeeps vaultKeeps loginKeeps col-2 mt-2 mb-2">
+  <div class="keeps col-2 mt-2 mb-2">
     <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" />
     <p>{{keepProp.description}}</p>
@@ -7,9 +7,9 @@
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
-    <div class="row justify-content-center" v-if="this.$route.name != 'login'">
+    <div class="pos" v-if="this.$route.name != 'login'">
       <button
-        class="btn btn-danger"
+        class="btn fab btn-danger"
         @click.prevent="deleteKeep"
         v-if="user.id == this.keepProp.userId"
       >
@@ -17,7 +17,7 @@
       </button>
       <div class="dropdown">
         <button
-          class="btn btn-warning mr-1 ml-1"
+          class="btn fab btn-warning"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -35,12 +35,12 @@
           >{{vault.name}}</li>
         </div>
       </div>
-      <div>
-        <button class="btn btn-success" @click.prevent="viewKeep">
+      <div class="align-content-center">
+        <button class="btn fab btn-success" @click.prevent="viewKeep">
           <i class="far fa-eye text-white"></i>
         </button>
         <button
-          class="btn btn-danger ml-1"
+          class="btn fab btn-danger"
           @click.prevent="removeKeep"
           v-if="this.$route.name == 'vaultKeeps'"
         >
@@ -78,16 +78,21 @@ export default {
         id: this.keepProp.id,
         keeps: this.keepProp.keeps + 1,
         views: this.keepProp.views,
-        vaulted: this.keepProp.vaulted == true
+        vaulted: (this.keepProp.vaulted = true)
       });
     },
-    // viewKeep() {
-    //   this.$store.dispatch("viewCounts", {
-    //     keepId: this.keepProp.id,
-    //     views: (this.keepProp.views += 1),
-    //     vaulted: this.keepProp.vaulted
-    //   });
-    // },
+    viewKeep() {
+      swal.fire({
+        imageUrl: this.keepProp.img,
+        imageHeight: 500,
+        imageAlt: "..."
+      });
+      this.$store.dispatch("addToVault", {
+        id: this.keepProp.id,
+        views: this.keepProp.views + 1,
+        vaulted: this.keepProp.vaulted
+      });
+    },
     deleteKeep() {
       let roblox = document.getElementById("oof");
       const toast = swal.mixin({
@@ -139,3 +144,28 @@ export default {
   }
 };
 </script>
+<style>
+.keeps {
+  position: relative;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.pos {
+  position: absolute;
+  right: -2rem;
+  top: -1rem;
+}
+.btn.fab {
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  right: -2.5rem;
+  top: -1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

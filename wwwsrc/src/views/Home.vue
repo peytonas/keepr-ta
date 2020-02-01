@@ -1,16 +1,9 @@
 <template>
   <div class="home container-fluid">
-    <div class="row justify-content-between">
-      <div class="col-1 mt-2 ml-n2">
-        <button class="btn btn-success" v-if="user.id" @click="logout">Logout</button>
-        <router-link v-else :to="{name: 'login'}">Login</router-link>
-      </div>
-      <div class="col-1 mt-1">
-        <button class="btn btn-warning mt-1" @click="goProfile">
-          <i class="far fa-caret-square-right text-white"></i>
-        </button>
-      </div>
+    <div class="row">
+      <Navbar />
     </div>
+    <div class="row justify-content-between"></div>
     <div class="row justify-content-center">
       <div class="col-10 col-sm-6">
         <h1>Welcome home, {{user.username}}!</h1>
@@ -24,7 +17,7 @@
         </button>
       </div>
     </div>
-    <div class="row justify-content-left mt-2 mb-2 ml-n3 mr-1">
+    <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
       <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>
@@ -32,12 +25,14 @@
 <script>
 import swal from "sweetalert2";
 import Auth from "../AuthService";
+import Navbar from "../Components/Navbar";
 import Keeps from "../Components/Keeps";
 import CreateKeepModal from "../Components/CreateKeepModal";
 export default {
   name: "home",
   mounted() {
     this.$store.dispatch("getKeeps");
+    this.$store.dispatch("getVaults");
   },
   computed: {
     user() {
@@ -45,6 +40,9 @@ export default {
     },
     keeps() {
       return this.$store.state.keeps;
+    },
+    vaults() {
+      return this.$store.state.vaults;
     }
   },
   methods: {
@@ -77,7 +75,8 @@ export default {
   },
   components: {
     Keeps,
-    CreateKeepModal
+    CreateKeepModal,
+    Navbar
   }
 };
 </script>
