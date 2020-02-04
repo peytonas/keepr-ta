@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import router from './router'
-import AuthService from './AuthService'
+import router from '../router'
+import AuthService from '../AuthService'
 
 Vue.use(Vuex)
 
@@ -99,8 +99,7 @@ export default new Vuex.Store({
     },
     async editKeep({ commit, dispatch }, payload) {
       try {
-        let res = await api.put(`keeps/${payload.keepId}`, payload)
-        commit("setKeep", res.data)
+        await api.put(`keeps/${payload.id}`, payload)
       } catch (error) {
         console.error(error)
       }
@@ -146,9 +145,9 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async getVaultKeeps({ commit, dispatch }, payload) {
+    async getVaultKeeps({ commit, dispatch }, vaultId) {
       try {
-        let res = await api.get('vaultkeeps/' + payload)
+        let res = await api.get(`vaultkeeps/${vaultId}`)
         commit('setKeeps', res.data)
       } catch (error) {
         console.error(error)
@@ -175,6 +174,7 @@ export default new Vuex.Store({
       try {
         await api.post('vaultkeeps', payload)
         await api.get('keeps/' + payload.keepId)
+        dispatch('getKeeps')
       } catch (error) {
         console.error(error)
       }

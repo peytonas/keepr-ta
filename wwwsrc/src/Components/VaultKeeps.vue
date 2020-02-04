@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="keeps col-2 mt-2 mb-2"
-    v-if="this.keepProp.isPrivate == false || this.keepProp.userId == this.user.id"
-  >
+  <div class="keeps col-2 mt-2 mb-2">
     <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" />
     <p>{{keepProp.description}}</p>
@@ -18,26 +15,6 @@
       >
         <i class="fas fa-dumpster-fire"></i>
       </button>
-      <div class="dropdown" v-if="this.$route.name !='vaultKeeps'">
-        <button
-          class="btn fab btn-warning"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i class="fas fa-dungeon text-white"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li
-            class="dropdown-item"
-            v-for="vault in vaults"
-            v-bind:key="vault.id"
-            @click="addToVault(vault.id)"
-          >{{vault.name}}</li>
-        </div>
-      </div>
       <div class="align-content-center">
         <button class="btn fab btn-success" @click.prevent="viewKeep">
           <i class="far fa-eye text-white"></i>
@@ -56,7 +33,7 @@
 <script>
 import swal from "sweetalert2";
 export default {
-  name: "Keeps",
+  name: "VaultKeeps",
   props: ["keepProp"],
   data() {
     return {};
@@ -64,9 +41,6 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
-    },
-    vaults() {
-      return this.$store.state.vaults;
     }
   },
   mounted() {},
@@ -78,10 +52,9 @@ export default {
       });
       this.$store.dispatch("addToVault", {
         id: this.keepProp.id,
-        isPrivate: this.keepProp.isPrivate,
         keeps: this.keepProp.keeps + 1,
         views: this.keepProp.views,
-        vaulted: (this.keepProp.vaulted = true)
+        vaulted: true
       });
     },
     viewKeep() {
@@ -92,10 +65,9 @@ export default {
       });
       this.$store.dispatch("editKeep", {
         id: this.keepProp.id,
-        isPrivate: this.keepProp.isPrivate,
         keeps: this.keepProp.keeps,
         views: this.keepProp.views + 1,
-        vaulted: (this.keepProp.vaulted = true)
+        vaulted: this.keepProp.vaulted
       });
     },
     deleteKeep() {

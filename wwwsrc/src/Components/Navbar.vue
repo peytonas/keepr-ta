@@ -19,7 +19,8 @@
         <router-link :to="{name: `profile`}">Profile</router-link>
       </div>
       <div class="pr-2">
-        <p @click="Logout" aria-placeholder="Logout-Button" class="logout" v-if="user.id">Logout</p>
+        <p @click="logout" aria-placeholder="Logout-Button" class="logout" v-if="user.id">Logout</p>
+        <router-link v-else :to="{name: 'login'}">Login</router-link>
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@
 <script>
 import Auth from "../AuthService";
 import router from "../router/index";
-import NotificationService from "../NotificationService.js";
+import NotificationService from "../NotificationService";
 export default {
   name: "Navbar",
   data() {
@@ -39,7 +40,7 @@ export default {
     }
   },
   methods: {
-    async Logout() {
+    async logout() {
       if (
         await NotificationService.confirmAction(
           "Are you sure you want to log out?"

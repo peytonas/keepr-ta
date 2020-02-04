@@ -39,7 +39,7 @@ namespace Keepr.Repositories
     }
     public void Edit(Keep newKeep)
     {
-      string sql = "UPDATE keeps SET views = @Views, keeps = @Keeps, vaulted = @Vaulted WHERE id = @Id";
+      string sql = "UPDATE keeps SET isPrivate = @IsPrivate, views = @Views, keeps = @Keeps, vaulted = @Vaulted WHERE id = @Id";
       _db.Execute(sql, newKeep);
     }
     public void Delete(int id, string userId)

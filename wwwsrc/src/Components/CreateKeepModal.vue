@@ -48,6 +48,16 @@
                 required
               />
             </div>
+            <div class="form-group">
+              <label for="description">PRIVATE?</label>
+              <input
+                type="checkbox"
+                class="form-control"
+                id="keepIsPrivate"
+                name="Private?"
+                v-model="newKeep.isPrivate"
+              />
+            </div>
             <audio id="kaching">
               <source src="../assets/ka-ching.mp3" type="audio/mpeg" />
             </audio>

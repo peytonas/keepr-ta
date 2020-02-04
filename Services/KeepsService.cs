@@ -38,8 +38,10 @@ namespace Keepr.Services
     {
       Keep exists = _repo.Get(newKeep.Id);
       if (exists == null) { throw new Exception("doesn't exist broh"); }
+      exists.IsPrivate = newKeep.IsPrivate;
       exists.Views = newKeep.Views;
       exists.Keeps = newKeep.Keeps;
+      exists.Vaulted = newKeep.Vaulted;
       _repo.Edit(exists);
       return exists;
     }

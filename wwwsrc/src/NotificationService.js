@@ -23,8 +23,8 @@ export default class NotificationService {
         width: 600,
         padding: '3em',
         showCancelButton: true,
-        confirmButtonText: 'Yes, do it!',
         cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Yes, do it!',
         reverseButtons: true
       }
       let result = await swalWithBootstrapButtons.fire(config)
