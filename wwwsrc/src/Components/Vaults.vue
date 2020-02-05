@@ -1,15 +1,11 @@
 <template>
-  <div>
-    <audio id="oof">
+  <!-- <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
-    </audio>
-    <li @click="goVault">{{vaultProp.name}}</li>
-    <!-- <div class="row justify-content-center mt-1">
-      <button class="btn btn-danger mb-1" @click.prevent="deleteVault">
-        <i class="fas fa-dumpster-fire"></i>
-      </button>
-    </div>-->
-  </div>
+  </audio>-->
+  <li class="dropdown-item" @click="goVault">{{vaultProp.name}}</li>
+  <!-- <button class="btn btn-danger mb-1 delete" @click.prevent="deleteVault">
+      <i class="fas fa-dumpster-fire ml-n1"></i>
+  </button>-->
 </template>
 <script>
 import swal from "sweetalert2";
@@ -61,3 +57,5 @@ export default {
   components: {}
 };
 </script>
+<style>
+</style>

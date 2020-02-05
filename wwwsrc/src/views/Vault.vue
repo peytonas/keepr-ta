@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
+    this.$store.dispatch("getVault", this.$route.params.vaultId);
   },
   components: {
     VaultKeeps,

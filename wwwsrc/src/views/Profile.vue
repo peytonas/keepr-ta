@@ -25,7 +25,7 @@
       </div>
       <div class="dropdown">
         <button
-          class="btn btn-warning dropdown-toggle text-white mr-2"
+          class="btn btn-warning text-white mr-2"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -36,9 +36,7 @@
           class="dropdown-menu dropdown-menu-right text-left"
           aria-labelledby="dropdownMenuButton"
         >
-          <li class="dropdown-item" href="#">
-            <Vaults v-for="vault in vaults" :vaultProp="vault" :key="vault._id" />
-          </li>
+          <Vaults v-for="vault in vaults" :vaultProp="vault" :key="vault._id" />
         </div>
       </div>
     </div>
