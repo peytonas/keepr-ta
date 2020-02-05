@@ -5,7 +5,12 @@
   >
     <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" />
-    <p>{{keepProp.description}}</p>
+    <p>
+      {{keepProp.description}}
+      <span v-if="this.keepProp.isPrivate == true">
+        <i class="fas fa-user-secret"></i>
+      </span>
+    </p>
     <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
@@ -29,7 +34,7 @@
         >
           <i class="fas fa-dungeon text-white"></i>
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <li
             class="dropdown-item"
             v-for="vault in vaults"

@@ -29,6 +29,7 @@
 import Auth from "../AuthService";
 import router from "../router/index";
 import NotificationService from "../NotificationService";
+
 export default {
   name: "Navbar",
   data() {

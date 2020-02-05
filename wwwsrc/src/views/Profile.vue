@@ -3,15 +3,17 @@
     <div class="row">
       <Navbar />
     </div>
-    <div class="row mt-2 ml-1 justify-content-left">
+    <div class="row mt-2 ml-1 justify-content-between text-center">
       <div class="col-2">
         <h2>Your Keeps:</h2>
       </div>
-    </div>
-    <div class="row justify-content-end">
-      <div class="col-1">
+      <div class="col-1 offset-7">
         <CreateKeepModal />
-        <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#create-keep-modal">
+        <button
+          class="btn btn-primary mb-2 create"
+          data-toggle="modal"
+          data-target="#create-keep-modal"
+        >
           <i class="fa fa-plus"></i>
         </button>
       </div>
@@ -21,12 +23,27 @@
           <i class="fa fa-plus"></i>
         </button>
       </div>
+      <div class="dropdown">
+        <button
+          class="btn btn-warning dropdown-toggle text-white mr-2"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >Vaults</button>
+        <div
+          class="dropdown-menu dropdown-menu-right text-left"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <li class="dropdown-item" href="#">
+            <Vaults v-for="vault in vaults" :vaultProp="vault" :key="vault._id" />
+          </li>
+        </div>
+      </div>
     </div>
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
       <Keeps v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
-    </div>
-    <div class="row justify-content-left border rounded border-dark mb-2 ml-1 mr-1">
-      <Vaults class="col-1" v-for="vault in vaults" :vaultProp="vault" :key="vault._id" />
     </div>
   </div>
 </template>
@@ -71,3 +88,11 @@ export default {
   }
 };
 </script>
+<style>
+.col-1 {
+  margin-right: -45px;
+}
+.create {
+  margin-right: -65px;
+}
+</style>

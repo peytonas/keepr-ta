@@ -3,12 +3,12 @@
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
-    <button class="btn border-dark rounded mt-1" @click="goVault">{{vaultProp.name}}</button>
-    <div class="row justify-content-center mt-1">
+    <li @click="goVault">{{vaultProp.name}}</li>
+    <!-- <div class="row justify-content-center mt-1">
       <button class="btn btn-danger mb-1" @click.prevent="deleteVault">
         <i class="fas fa-dumpster-fire"></i>
       </button>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
