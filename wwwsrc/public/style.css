@@ -6,7 +6,7 @@
   height: auto;
 }
 .grid {
-  background: linear-gradient(rgb(33,26,33), white);
+  background: linear-gradient(#b5b6e4, white);
   text-align: center;
   height: auto;
   min-height: 100vh;

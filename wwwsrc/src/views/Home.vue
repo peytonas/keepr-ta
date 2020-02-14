@@ -9,7 +9,7 @@
       </div>
       <div class="col-3 text-right">
         <CreateKeepModal />
-        <button class="btn btn-primary mt-1" data-toggle="modal" data-target="#create-keep-modal">
+        <button class="btn btn-success mt-1" data-toggle="modal" data-target="#create-keep-modal">
           <i class="fa fa-plus"></i>
         </button>
       </div>

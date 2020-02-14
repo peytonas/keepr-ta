@@ -28,8 +28,7 @@
 <script>
 import Auth from "../AuthService";
 import router from "../router/index";
-import NotificationService from "../NotificationService";
-
+import swal from "sweetalert2";
 export default {
   name: "Navbar",
   data() {
@@ -42,13 +41,29 @@ export default {
   },
   methods: {
     async logout() {
-      if (
-        await NotificationService.confirmAction(
-          "Are you sure you want to log out?"
-        )
-      ) {
-        this.$store.dispatch("logout");
-      }
+      const toast = swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000
+      });
+      swal
+        .fire({
+          title: "Are you sure?",
+          type: "warning",
+          showCancelButton: true,
+          background: "#cec9cc",
+          confirmButtonColor: "#4f43ae",
+          cancelButtonColor: "#de4337",
+          confirmButtonText: "Do it."
+        })
+        .then(result => {
+          if (result.value) {
+            //NOTE put the sound below .
+            toast.fire("logged out", "", "success");
+            this.$store.dispatch("logout");
+          }
+        });
     },
     goDashboard() {
       this.$router.push({ name: "home" });
@@ -66,7 +81,7 @@ export default {
   background: linear-gradient(#413b41, #322c32, #211a21);
 }
 .logout {
-  color: red;
+  color: #de4337;
   cursor: pointer;
   margin-bottom: 5px;
 }
@@ -74,14 +89,14 @@ button:focus {
   outline: 0;
 }
 .logout:hover {
-  color: white;
-  text-decoration: solid underline;
+  color: #d62114;
+  /* text-decoration: solid underline; */
 }
 .dashboard-link {
   cursor: pointer;
 }
 .dashboard-link:hover {
-  color: white;
-  text-decoration: solid underline;
+  color: #d62114;
+  /* text-decoration: solid underline; */
 }
 </style>

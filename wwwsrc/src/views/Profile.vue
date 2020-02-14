@@ -10,7 +10,7 @@
       <div class="col-1 offset-7">
         <CreateKeepModal />
         <button
-          class="btn btn-primary mb-2 create"
+          class="btn btn-success mb-2 create"
           data-toggle="modal"
           data-target="#create-keep-modal"
         >
@@ -19,7 +19,11 @@
       </div>
       <div class="col-1">
         <CreateVaultModal />
-        <button class="btn btn-success mb-2" data-toggle="modal" data-target="#create-vault-modal">
+        <button
+          class="btn btn-secondary mb-2"
+          data-toggle="modal"
+          data-target="#create-vault-modal"
+        >
           <i class="fa fa-plus"></i>
         </button>
       </div>

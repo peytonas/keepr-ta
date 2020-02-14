@@ -91,7 +91,7 @@ export default {
         title: this.keepProp.name,
         imageUrl: this.keepProp.img,
         imageAlt: "...",
-        background: "#211a21",
+        background: "#b5b6e4",
         backdrop: "rgba(33,26,33,0.6)",
         showConfirmButton: false
       });
@@ -117,8 +117,9 @@ export default {
           text: "You won't be able to get it back...",
           type: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
+          background: "#cec9cc",
+          confirmButtonColor: "#4f43ae",
+          cancelButtonColor: "#de4337",
           confirmButtonText: "Do it."
         })
         .then(result => {
