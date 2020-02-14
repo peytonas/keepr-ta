@@ -14,15 +14,15 @@
       <button
         class="btn fab btn-danger"
         @click.prevent="deleteKeep"
-        v-if="user.id == this.keepProp.userId"
+        v-if="user.id == this.keepProp.userId && this.$route.name != 'vaults'"
       >
         <i class="fas fa-dumpster-fire"></i>
       </button>
       <div class="align-content-center">
         <button
-          class="btn fab btn-danger"
+          class="btn fab btn-danger mt-1"
           @click.prevent="removeKeep"
-          v-if="this.$route.name == 'vaultKeeps'"
+          v-if="this.$route.name == 'vaults'"
         >
           <i class="fas fa-minus-circle"></i>
         </button>
