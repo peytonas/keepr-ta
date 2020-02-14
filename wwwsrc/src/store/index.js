@@ -103,7 +103,9 @@ export default new Vuex.Store({
     },
     async editKeep({ commit, dispatch }, payload) {
       try {
-        await api.put(`keeps/${payload.id}`, payload)
+        await api.put(`keeps/` + payload.id, payload)
+        // dispatch("getKeeps")
+        // dispatch("getUserKeeps")
       } catch (error) {
         console.error(error)
       }

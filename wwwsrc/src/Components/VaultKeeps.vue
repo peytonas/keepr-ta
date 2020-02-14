@@ -8,7 +8,7 @@
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
     <div class="pos text-dark">
-      <p class="count">{{this.keeps()}}</p>
+      <p class="count">{{this.keeps()}}.</p>
     </div>
     <div class="pos" v-if="this.$route.name != 'login'">
       <button

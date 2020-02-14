@@ -76,7 +76,7 @@ export default {
       //put the sound below
       money.play();
       setTimeout(() => {
-        toast.fire("it's alive!", "", "success");
+        toast.fire("", "", "success");
         this.$store.dispatch("createKeep", this.newKeep);
         this.newKeep = {};
         this.modalClose();

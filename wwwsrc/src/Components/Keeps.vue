@@ -74,6 +74,12 @@ export default {
   mounted() {},
   methods: {
     addToVault(vaultId) {
+      const toast = swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.$store.dispatch("storeKeep", {
         keepId: this.keepProp.id,
         vaultId: vaultId
@@ -85,6 +91,7 @@ export default {
         views: this.keepProp.views,
         vaulted: (this.keepProp.vaulted = true)
       });
+      toast.fire("added " + this.keepProp.name + " to vault!", "", "success");
     },
     viewKeep() {
       swal.fire({
@@ -114,7 +121,6 @@ export default {
       swal
         .fire({
           title: "Are you sure?",
-          text: "You won't be able to get it back...",
           type: "warning",
           showCancelButton: true,
           background: "#cec9cc",
@@ -127,7 +133,7 @@ export default {
             //NOTE put the sound below .
             roblox.play();
             setTimeout(() => {
-              toast.fire("it's gone jim!", "", "success");
+              toast.fire("deleted " + this.keepProp.name + "!", "", "success");
               this.$store.dispatch("deleteKeep", this.keepProp.id);
             }, 500);
           }

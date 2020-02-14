@@ -43,29 +43,6 @@ export default {
     }
   },
   methods: {
-    logout() {
-      const toast = swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000
-      });
-      swal
-        .fire({
-          title: "Are you sure?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Logout"
-        })
-        .then(result => {
-          if (result.value) {
-            this.$store.dispatch("logout");
-            toast.fire("logged out!", "", "success");
-          }
-        });
-    },
     goProfile() {
       this.$router.push("profile");
     }
