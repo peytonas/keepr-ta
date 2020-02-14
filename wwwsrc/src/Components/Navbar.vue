@@ -62,7 +62,9 @@ export default {
 <style scoped>
 /* .navbar-toggler {
 } */
-
+.navbar {
+  background: linear-gradient(#413b41, #322c32, #211a21);
+}
 .logout {
   color: red;
   cursor: pointer;

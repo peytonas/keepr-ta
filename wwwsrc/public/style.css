@@ -1,9 +1,12 @@
+/* *{
+  border: 1px solid red
+} */
 .grid-item {
   width: auto;
   height: auto;
 }
 .grid {
-  background: linear-gradient(rgb(255, 0, 0), white);
+  background: linear-gradient(rgb(33,26,33), white);
   text-align: center;
   height: auto;
   min-height: 100vh;

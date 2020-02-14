@@ -4,7 +4,7 @@
     v-if="this.keepProp.isPrivate == false || this.keepProp.userId == this.user.id"
   >
     <!-- <p>{{keepProp.name}}</p> -->
-    <img class="keep bg-dark" :src="keepProp.img" />
+    <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
     <p>
       {{keepProp.description}}
       <span v-if="this.keepProp.isPrivate == true">
@@ -44,9 +44,6 @@
         </div>
       </div>
       <div class="align-content-center">
-        <button class="btn fab btn-success" @click.prevent="viewKeep">
-          <i class="far fa-eye text-white"></i>
-        </button>
         <button
           class="btn fab btn-danger"
           @click.prevent="removeKeep"
@@ -91,9 +88,12 @@ export default {
     },
     viewKeep() {
       swal.fire({
-        text: this.keepProp.name,
+        title: this.keepProp.name,
         imageUrl: this.keepProp.img,
-        imageAlt: "..."
+        imageAlt: "...",
+        background: "#211a21",
+        backdrop: "rgba(33,26,33,0.6)",
+        showConfirmButton: false
       });
       this.$store.dispatch("editKeep", {
         id: this.keepProp.id,

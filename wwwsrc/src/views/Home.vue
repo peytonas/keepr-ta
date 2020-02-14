@@ -3,16 +3,13 @@
     <div class="row">
       <Navbar />
     </div>
-    <div class="row justify-content-between"></div>
-    <div class="row justify-content-center">
-      <div class="col-10 col-sm-6">
+    <div class="row justify-content-end">
+      <div class="col-2 col-sm-6">
         <h1>Welcome home, {{user.username}}!</h1>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-1">
+      <div class="col-3 text-right">
         <CreateKeepModal />
-        <button class="btn btn-primary" data-toggle="modal" data-target="#create-keep-modal">
+        <button class="btn btn-primary mt-1" data-toggle="modal" data-target="#create-keep-modal">
           <i class="fa fa-plus"></i>
         </button>
       </div>

@@ -1,12 +1,15 @@
 <template>
   <div class="keeps col-2 mt-2 mb-2">
-    <!-- <p>{{keepProp.name}}</p> -->
-    <img class="keep bg-dark" :src="keepProp.img" />
+    <!-- <p>{{this.keeps()}}</p> -->
+    <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
     <p>{{keepProp.description}}</p>
     <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
+    <div class="pos text-white">
+      <p class="count">{{this.keeps()}}</p>
+    </div>
     <div class="pos" v-if="this.$route.name != 'login'">
       <button
         class="btn fab btn-danger"
@@ -16,9 +19,6 @@
         <i class="fas fa-dumpster-fire"></i>
       </button>
       <div class="align-content-center">
-        <button class="btn fab btn-success" @click.prevent="viewKeep">
-          <i class="far fa-eye text-white"></i>
-        </button>
         <button
           class="btn fab btn-danger"
           @click.prevent="removeKeep"
@@ -61,7 +61,10 @@ export default {
       swal.fire({
         text: this.keepProp.name,
         imageUrl: this.keepProp.img,
-        imageAlt: "..."
+        imageAlt: "...",
+        background: "#343a40",
+        backdrop: "rgba(33,26,33,0.6)",
+        showConfirmButton: false
       });
       this.$store.dispatch("editKeep", {
         id: this.keepProp.id,
@@ -117,6 +120,11 @@ export default {
             });
           }
         });
+    },
+    keeps() {
+      let num = this.$store.state.keeps.indexOf(this.keepProp);
+      num += 1;
+      return num;
     }
   }
 };
@@ -128,6 +136,15 @@ export default {
   margin-right: 2px;
   padding-left: 5px;
   padding-right: 5px;
+}
+.count {
+  position: relative;
+  left: -14rem;
+  top: 0rem;
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  display: flex;
 }
 .pos {
   position: absolute;

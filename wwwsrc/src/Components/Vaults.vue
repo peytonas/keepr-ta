@@ -19,7 +19,7 @@ export default {
   methods: {
     goVault() {
       this.$router.push({
-        name: "vaultKeeps",
+        name: "vaults",
         params: { vaultId: this.vaultProp.id }
       });
       this.$store.dispatch("getVault", this.vaultProp.id);
@@ -54,6 +54,7 @@ export default {
         });
     }
   },
+  mounted() {},
   components: {}
 };
 </script>

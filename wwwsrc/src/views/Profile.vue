@@ -31,7 +31,7 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >Vaults</button>
+        >Vaults ({{this.vaults.length}})</button>
         <div
           class="dropdown-menu dropdown-menu-right text-left"
           aria-labelledby="dropdownMenuButton"
@@ -57,10 +57,6 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    this.$store.dispatch("getUserKeeps");
-    this.$store.dispatch("getVaults");
-  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -76,6 +72,10 @@ export default {
     goHome() {
       this.$router.push("/");
     }
+  },
+  mounted() {
+    this.$store.dispatch("getUserKeeps");
+    this.$store.dispatch("getVaults");
   },
   components: {
     Keeps,

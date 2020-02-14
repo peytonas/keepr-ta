@@ -1,17 +1,9 @@
 <template>
   <div id="create-keep-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog text-center" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">NEW KEEP</h5>
-          <button
-            type="button"
-            class="close btn btn-danger"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="createKeep">
@@ -49,14 +41,8 @@
               />
             </div>
             <div class="form-group">
-              <label for="description">PRIVATE?</label>
-              <input
-                type="checkbox"
-                class="form-control"
-                id="keepIsPrivate"
-                name="Private?"
-                v-model="newKeep.isPrivate"
-              />
+              <label for="description" class="mr-2">PRIVATE?</label>
+              <input type="checkbox" id="keepIsPrivate" name="Private?" v-model="newKeep.isPrivate" />
             </div>
             <audio id="kaching">
               <source src="../assets/ka-ching.mp3" type="audio/mpeg" />

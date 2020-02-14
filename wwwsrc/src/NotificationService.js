@@ -3,7 +3,7 @@ import swal from 'sweetalert2'
 const swalWithBootstrapButtons = swal.mixin({
   customClass: {
     confirmButton: 'btn btn-primary',
-    cancelButton: 'btn btn-secondary mr-5',
+    cancelButton: 'btn btn-secondary ml-5',
   },
   buttonsStyling: false
 })
@@ -25,7 +25,7 @@ export default class NotificationService {
         showCancelButton: true,
         cancelButtonText: 'No, cancel!',
         confirmButtonText: 'Yes, do it!',
-        reverseButtons: true
+        reverseButtons: false
       }
       let result = await swalWithBootstrapButtons.fire(config)
       return result.value

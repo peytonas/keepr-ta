@@ -28,12 +28,14 @@ namespace Keepr.Repositories
       string sql = @"
       SELECT * FROM vaultkeeps vk
       INNER JOIN keeps k ON k.id = vk.keepId 
-      WHERE (vaultId = @VaultId AND vk.userId = @UserId)";
+      WHERE (vaultId = @VaultId AND vk.userId = @UserId)
+      ";
       return _db.Query<Keep>(sql, new { vaultId, userId });
     }
     public VaultKeep GetId(int vaultId, int keepId)
     {
-      string sql = "SELECT * FROM vaultkeeps WHERE vaultId = @VaultId AND keepId = @KeepId";
+      string sql = @"
+      SELECT * FROM vaultkeeps WHERE vaultId = @VaultId AND keepId = @KeepId";
       return _db.QueryFirstOrDefault<VaultKeep>(sql, new { vaultId, keepId });
     }
     public void Delete(int id)
