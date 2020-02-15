@@ -1,12 +1,9 @@
 /* *{
   border: 1px solid red
 } */
-.grid-item {
-  width: auto;
-  height: auto;
-}
+
 .grid {
-  background: linear-gradient(#b5b6e4, white);
+  background: linear-gradient(#4f43ae, #b5b6e4, white);
   text-align: center;
   height: auto;
   min-height: 100vh;
@@ -15,6 +12,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+/* .row{
+  column-count: 4;
+  padding:1em;
+
+} */
 .keep {
   border: 1px solid #ffffff;
   border-radius: 4px;

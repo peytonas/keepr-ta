@@ -109,8 +109,9 @@ export default {
           title: "Are you sure?",
           type: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
+          background: "#cec9cc",
+          confirmButtonColor: "#4f43ae",
+          cancelButtonColor: "#de4337",
           confirmButtonText: "Yes!"
         })
         .then(result => {

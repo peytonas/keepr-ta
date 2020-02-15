@@ -3,15 +3,20 @@
     class="keeps col-2 mt-2 mb-2"
     v-if="this.keepProp.isPrivate == false || this.keepProp.userId == this.user.id"
   >
-    <!-- <p>{{keepProp.name}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
     <p>
-      {{keepProp.description}}
+      <span v-if="this.$route.name == 'profile'">{{keepProp.name}}</span>
+      <br />
+      <span v-if="this.$route.name == 'profile'">{{keepProp.description}}</span>
       <span v-if="this.keepProp.isPrivate == true">
         <i class="fas fa-user-secret"></i>
       </span>
     </p>
-    <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
+    <p>
+      <span
+        v-if="this.$route.name != 'login'"
+      >VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</span>
+    </p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
