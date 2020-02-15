@@ -87,10 +87,4 @@ export default {
 };
 </script>
 <style>
-.col-1 {
-  margin-right: -45px;
-}
-.create {
-  margin-right: -65px;
-}
 </style>
