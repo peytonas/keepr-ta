@@ -2,7 +2,12 @@
   <div class="keeps col-2 mt-2 mb-2">
     <!-- <p>{{this.keeps()}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
-    <p class="overflow">{{keepProp.description}}</p>
+    <p class="overflow">
+      {{keepProp.description}}
+      <span v-if="this.keepProp.isPrivate == true">
+        <i class="fas fa-user-secret"></i>
+      </span>
+    </p>
     <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
@@ -141,7 +146,7 @@ export default {
 }
 .count {
   position: relative;
-  left: -14rem;
+  left: -13rem;
   top: 0rem;
   height: 30px;
   width: 30px;
