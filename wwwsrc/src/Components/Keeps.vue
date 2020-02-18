@@ -4,7 +4,7 @@
     v-if="this.keepProp.isPrivate == false || this.keepProp.userId == this.user.id"
   >
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
-    <p>
+    <p class="overflow">
       <span v-if="this.$route.name == 'profile'">{{keepProp.name}}</span>
       <br />
       <span v-if="this.$route.name == 'profile'">{{keepProp.description}}</span>
@@ -189,5 +189,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.overflow {
+  overflow: hidden;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="keeps col-2 mt-2 mb-2">
     <!-- <p>{{this.keeps()}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
-    <p>{{keepProp.description}}</p>
+    <p class="overflow">{{keepProp.description}}</p>
     <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
@@ -163,5 +163,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.overflow {
+  overflow: hidden;
 }
 </style>
