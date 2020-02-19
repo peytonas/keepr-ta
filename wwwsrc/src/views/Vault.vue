@@ -50,7 +50,7 @@ export default {
           background: "#cec9cc",
           confirmButtonColor: "#4f43ae",
           cancelButtonColor: "#de4337",
-          confirmButtonText: "Logout"
+          confirmButtonText: "Delete"
         })
         .then(result => {
           if (result.value) {
