@@ -1,5 +1,5 @@
 <template>
-  <div class="keeps col-2 mt-2 mb-2">
+  <div class="col-2 mt-2 mb-2">
     <!-- <p>{{this.keeps()}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
     <p class="overflow">
@@ -8,24 +8,19 @@
         <i class="fas fa-user-secret"></i>
       </span>
     </p>
-    <p>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</p>
+    <p class="mt-n3">
+      <span>VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</span>
+    </p>
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
     <div class="pos text-dark">
       <p class="count">{{this.keeps()}}.</p>
     </div>
-    <div class="pos" v-if="this.$route.name != 'login'">
-      <button
-        class="btn fab btn-danger"
-        @click.prevent="deleteKeep"
-        v-if="user.id == this.keepProp.userId && this.$route.name != 'vaults'"
-      >
-        <i class="fas fa-dumpster-fire"></i>
-      </button>
+    <div class="pos mr-n1 mt-1">
       <div class="align-content-center">
         <button
-          class="btn fab btn-danger mt-1"
+          class="btn fab btn-danger"
           @click.prevent="removeKeep"
           v-if="this.$route.name == 'vaults'"
         >
@@ -137,16 +132,12 @@ export default {
 };
 </script>
 <style>
-.keeps {
-  position: relative;
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
+span {
+  font-size: 0.75rem;
 }
 .count {
   position: relative;
-  left: -13rem;
+  left: -10.5rem;
   top: 0rem;
   height: 30px;
   width: 30px;
@@ -155,19 +146,8 @@ export default {
 }
 .pos {
   position: absolute;
-  right: -2rem;
+  right: -1rem;
   top: -1rem;
-}
-.btn.fab {
-  height: 30px;
-  width: 30px;
-  font-size: 12px;
-  right: -2.5rem;
-  top: -1rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .overflow {
   overflow: hidden;

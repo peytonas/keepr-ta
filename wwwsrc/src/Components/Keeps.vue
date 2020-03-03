@@ -1,6 +1,6 @@
 <template>
   <div
-    class="keeps col-2 mt-2 mb-2"
+    class="col-2 mt-2 mb-2"
     v-if="this.keepProp.isPrivate == false || this.keepProp.userId == this.user.id"
   >
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
@@ -12,7 +12,7 @@
         <i class="fas fa-user-secret"></i>
       </span>
     </p>
-    <p>
+    <p class="mt-n3">
       <span
         v-if="this.$route.name != 'login'"
       >VIEWS: {{keepProp.views}} | VAULTED: {{keepProp.keeps}}</span>
@@ -20,7 +20,7 @@
     <audio id="oof">
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
-    <div class="pos" v-if="this.$route.name != 'login'">
+    <div class="pos mr-n1 mt-1" v-if="this.$route.name != 'login'">
       <button
         class="btn fab btn-danger"
         @click.prevent="deleteKeep"
@@ -167,29 +167,12 @@ export default {
 };
 </script>
 <style>
-.keeps {
-  position: relative;
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
 .pos {
   position: absolute;
-  right: -2rem;
+  right: -1rem;
   top: -1rem;
 }
-.btn.fab {
-  height: 30px;
-  width: 30px;
-  font-size: 12px;
-  right: -2.5rem;
-  top: -1rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .overflow {
   overflow: hidden;
 }

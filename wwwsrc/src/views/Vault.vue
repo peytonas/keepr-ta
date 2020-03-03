@@ -73,18 +73,7 @@ export default {
 <style>
 .pos {
   position: absolute;
-  right: -2rem;
+  right: -0.55rem;
   top: -1rem;
-}
-.btn.fab {
-  height: 30px;
-  width: 30px;
-  font-size: 12px;
-  right: -2.5rem;
-  top: -1rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>
