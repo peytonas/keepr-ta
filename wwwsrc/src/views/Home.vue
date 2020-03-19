@@ -42,11 +42,7 @@ export default {
       return this.$store.state.vaults;
     }
   },
-  methods: {
-    goProfile() {
-      this.$router.push("profile");
-    }
-  },
+  methods: {},
   components: {
     Keeps,
     CreateKeepModal,
