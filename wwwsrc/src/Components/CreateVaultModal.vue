@@ -51,7 +51,6 @@ export default {
       newVault: {}
     };
   },
-  computed: {},
   methods: {
     createVault() {
       let money = document.getElementById("kaching");
@@ -61,7 +60,6 @@ export default {
         showConfirmButton: false,
         timer: 2000
       });
-      //put the sound below
       money.play();
       setTimeout(() => {
         toast.fire("", "", "success");
@@ -75,7 +73,6 @@ export default {
         $("#create-vault-modal").modal("hide");
       }, 500);
     }
-  },
-  components: {}
+  }
 };
 </script>
