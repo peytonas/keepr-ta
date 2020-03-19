@@ -1,6 +1,5 @@
 <template>
   <div class="col-2 mt-2 mb-2">
-    <!-- <p>{{this.keeps()}}</p> -->
     <img class="keep bg-dark" :src="keepProp.img" @click.prevent="viewKeep" />
     <p class="overflow">
       {{keepProp.description}}
@@ -15,7 +14,7 @@
       <source src="../assets/roblox-oof.mp3" type="audio/mpeg" />
     </audio>
     <div class="pos text-dark">
-      <p class="count">{{this.keeps()}}.</p>
+      <p class="count">{{this.countKeeps()}}.</p>
     </div>
     <div class="pos mr-n1 mt-1">
       <div class="align-content-center">
@@ -35,15 +34,11 @@ import swal from "sweetalert2";
 export default {
   name: "VaultKeeps",
   props: ["keepProp"],
-  data() {
-    return {};
-  },
   computed: {
     user() {
       return this.$store.state.user;
     }
   },
-  mounted() {},
   methods: {
     addToVault(vaultId) {
       this.$store.dispatch("storeKeep", {
@@ -57,6 +52,7 @@ export default {
         vaulted: true
       });
     },
+
     viewKeep() {
       swal.fire({
         text: this.keepProp.name,
@@ -73,6 +69,7 @@ export default {
         vaulted: this.keepProp.vaulted
       });
     },
+
     deleteKeep() {
       let roblox = document.getElementById("oof");
       const toast = swal.mixin({
@@ -103,6 +100,7 @@ export default {
           }
         });
     },
+
     removeKeep() {
       swal
         .fire({
@@ -123,7 +121,8 @@ export default {
           }
         });
     },
-    keeps() {
+
+    countKeeps() {
       let num = this.$store.state.keeps.indexOf(this.keepProp);
       num += 1;
       return num;

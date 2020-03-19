@@ -35,14 +35,15 @@ export default {
     user() {
       return this.$store.state.user;
     },
+
     keeps() {
       return this.$store.state.keeps;
     },
+
     vaults() {
       return this.$store.state.vaults;
     }
   },
-  methods: {},
   components: {
     Keeps,
     CreateKeepModal,

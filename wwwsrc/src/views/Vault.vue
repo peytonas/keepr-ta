@@ -18,16 +18,15 @@ import Navbar from "../Components/Navbar";
 import swal from "sweetalert2";
 export default {
   name: "vaultKeep",
-  data() {
-    return {};
-  },
   computed: {
     user() {
       return this.$store.state.user;
     },
+
     vault() {
       return this.$store.state.vault;
     },
+
     keeps() {
       return this.$store.state.keeps;
     }
@@ -36,6 +35,7 @@ export default {
     goProfile() {
       this.$router.push("/profile");
     },
+
     deleteVault() {
       const toast = swal.mixin({
         toast: true,

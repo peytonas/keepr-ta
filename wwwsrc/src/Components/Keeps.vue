@@ -65,9 +65,6 @@ import swal from "sweetalert2";
 export default {
   name: "Keeps",
   props: ["keepProp"],
-  data() {
-    return {};
-  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -76,7 +73,6 @@ export default {
       return this.$store.state.vaults;
     }
   },
-  mounted() {},
   methods: {
     addToVault(vaultId) {
       const toast = swal.mixin({
@@ -98,6 +94,7 @@ export default {
       });
       toast.fire("added " + this.keepProp.name + " to vault!", "", "success");
     },
+
     viewKeep() {
       swal.fire({
         title: this.keepProp.name,
@@ -115,6 +112,7 @@ export default {
         vaulted: (this.keepProp.vaulted = true)
       });
     },
+
     deleteKeep() {
       let roblox = document.getElementById("oof");
       const toast = swal.mixin({
@@ -144,6 +142,7 @@ export default {
           }
         });
     },
+
     removeKeep() {
       swal
         .fire({

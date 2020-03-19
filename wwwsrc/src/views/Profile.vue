@@ -54,16 +54,15 @@ import CreateKeepModal from "../Components/CreateKeepModal";
 import CreateVaultModal from "../Components/CreateVaultModal";
 export default {
   name: "profile",
-  data() {
-    return {};
-  },
   computed: {
     user() {
       return this.$store.state.user;
     },
+
     userKeeps() {
       return this.$store.state.userKeeps;
     },
+
     vaults() {
       return this.$store.state.vaults;
     }
