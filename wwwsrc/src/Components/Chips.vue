@@ -22,7 +22,7 @@
       :key="chip.name"
     >
       {{chip.name}}
-      <span class="pointer" @click="deleteChip">&times;</span>
+      <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@ export default {
       chips: []
     };
   },
+  computed: {},
   methods: {
     createChip() {
       const toast = swal.mixin({
@@ -44,11 +45,19 @@ export default {
         showConfirmButton: false,
         timer: 2000
       });
+      for (var c in this.chips) {
+        if (this.newChip.name === this.chips[c].name) {
+          toast.fire("chip already exists", "", "error");
+        }
+      }
       this.chips.push(this.newChip);
       toast.fire("", "", "success");
       this.newChip = {};
     },
-    deleteChip() {
+
+    deleteChip(chip) {
+      console.log(chip.name);
+      this.chips.splice(chip);
       console.log("deleted");
     }
   }

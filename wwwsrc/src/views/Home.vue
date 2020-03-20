@@ -16,7 +16,7 @@
     </div>
     <Chips />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
-      <Keeps v-for="keep in initialKeeps" :keepProp="keep" :key="keep._id" />
+      <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>
 </template>

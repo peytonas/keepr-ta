@@ -36,6 +36,12 @@ USE keepr2020;
 --         ON DELETE CASCADE,  
 --     PRIMARY KEY (id)
 -- );
+
+-- CREATE TABLE chips (
+--     name VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (name)
+-- );
+
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
 --     vaultId int NOT NULL,
@@ -68,4 +74,5 @@ USE keepr2020;
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;
+-- DROP TABLE IF EXISTS chips;
 -- DROP TABLE IF EXISTS users;
