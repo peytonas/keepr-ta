@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+    <Chips />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
       <Keeps v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
     </div>
@@ -50,6 +51,7 @@ import Auth from "../AuthService";
 import Keeps from "../Components/Keeps";
 import Vaults from "../Components/Vaults";
 import Navbar from "../Components/Navbar";
+import Chips from "../Components/Chips";
 import CreateKeepModal from "../Components/CreateKeepModal";
 import CreateVaultModal from "../Components/CreateVaultModal";
 export default {
@@ -80,6 +82,7 @@ export default {
     Keeps,
     Vaults,
     Navbar,
+    Chips,
     CreateKeepModal,
     CreateVaultModal
   }

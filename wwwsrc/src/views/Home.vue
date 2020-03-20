@@ -16,7 +16,7 @@
     </div>
     <Chips />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
-      <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
+      <Keeps v-for="keep in initialKeeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>
 </template>
@@ -32,6 +32,21 @@ export default {
   mounted() {
     this.$store.dispatch("getKeeps");
     this.$store.dispatch("getVaults");
+    this.scrollKeeps();
+  },
+  methods: {
+    scrollKeeps() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          console.log("scrolled!");
+          console.log(this.keepCount);
+        }
+      };
+    }
   },
   computed: {
     user() {
@@ -44,6 +59,18 @@ export default {
 
     vaults() {
       return this.$store.state.vaults;
+    },
+
+    keepCount() {
+      return 18;
+    },
+
+    initialKeeps() {
+      let scrollKeeps = [];
+      for (var i = 0; i <= this.keepCount; i++) {
+        scrollKeeps.push(this.keeps[i]);
+      }
+      return scrollKeeps;
     }
   },
   components: {

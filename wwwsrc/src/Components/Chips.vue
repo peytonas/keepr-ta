@@ -6,16 +6,24 @@
           <input
             type="text"
             class="form-control"
-            placeholder="create chip..."
+            placeholder="sort keeps by..."
             v-model="newChip.name"
           />
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">Button</button>
+            <button class="btn btn-primary" type="button">add</button>
           </div>
         </div>
       </form>
     </div>
-    <v-chip class="ma-2" color="primary" v-for="chip in chips" :key="chip.name">{{chip.name}}</v-chip>
+    <div
+      class="border rounded-pill bg-dark text-danger mb-4 ml-1 pl-1 pr-1"
+      color="primary"
+      v-for="chip in chips"
+      :key="chip.name"
+    >
+      {{chip.name}}
+      <span class="pointer" @click="deleteChip">&times;</span>
+    </div>
   </div>
 </template>
 <script>
@@ -42,9 +50,14 @@ export default {
       toast.fire("", "", "success");
       this.newChip = {};
     },
-    deleteChip() {}
+    deleteChip() {
+      console.log("deleted");
+    }
   }
 };
 </script>
 <style>
+.pointer {
+  cursor: pointer;
+}
 </style>
