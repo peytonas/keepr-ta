@@ -43,7 +43,6 @@ export default {
 
         if (bottomOfWindow) {
           console.log("scrolled!");
-          console.log(this.keepCount);
         }
       };
     }

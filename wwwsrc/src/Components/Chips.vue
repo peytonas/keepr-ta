@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     createChip() {
-      let money = document.getElementById("kaching");
       const toast = swal.mixin({
         toast: true,
         position: "top-end",
@@ -46,7 +45,6 @@ export default {
         timer: 2000
       });
       this.chips.push(this.newChip);
-      money.play();
       toast.fire("", "", "success");
       this.newChip = {};
     },
