@@ -22,9 +22,17 @@
       :key="chip.name"
     >
       {{chip.name}}
-      <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
+      <span
+        class="pointer"
+        @click="$emit('deleteChip', chip)"
+        @click.prevent="deleteChip(chip)"
+      >&times;</span>
     </div>
-    <div class="pointer text-warning ml-1 mt-1" @click.prevent="resetChips()">
+    <div
+      class="pointer text-warning ml-1 mt-1"
+      @click="$emit('resetChips')"
+      @click.prevent="resetChips()"
+    >
       <p>clear filters</p>
     </div>
   </div>

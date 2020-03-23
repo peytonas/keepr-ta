@@ -14,7 +14,7 @@
         </button>
       </div>
     </div>
-    <Chips @newChip="filterKeeps" />
+    <Chips @newChip="addChips" @deleteChip="deleteChip" @resetChips="resetChips" />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
       <Keeps v-for="keep in keeps" :keepProp="keep" :key="keep._id" />
     </div>
@@ -29,6 +29,11 @@ import Chips from "../Components/Chips";
 import CreateKeepModal from "../Components/CreateKeepModal";
 export default {
   name: "home",
+  data() {
+    return {
+      chips: []
+    };
+  },
   mounted() {
     this.$store.dispatch("getKeeps");
     this.$store.dispatch("getVaults");
@@ -42,6 +47,8 @@ export default {
     keeps() {
       return this.$store.state.keeps;
     },
+
+    filteredKeeps() {},
 
     vaults() {
       return this.$store.state.vaults;
@@ -60,16 +67,28 @@ export default {
     // }
   },
   methods: {
-    filterKeeps(name) {
-      console.log("chip:", name);
-      console.log(
-        this.keeps.filter(
-          k =>
-            k.name.toLowerCase().includes(name) ||
-            k.description.toLowerCase().includes(name)
-        )
-      );
+    addChips(chip) {
+      this.chips.push(chip);
+      console.log(this.chips);
+    },
+
+    deleteChip(chip) {
+      this.chips = this.chips.filter(c => c !== chip.name);
+      console.log(this.chips);
+    },
+
+    resetChips() {
+      this.chips = [];
     }
+
+    // filterKeeps(name) {
+    //   console.log("chip:", name);
+    //   this.keeps = this.keeps.filter(
+    //     k =>
+    //       k.name.toLowerCase().includes(name) ||
+    //       k.description.toLowerCase().includes(name)
+    //   );
+    // }
     // scrollKeeps() {
     //   window.onscroll = () => {
     //     let bottomOfWindow =
