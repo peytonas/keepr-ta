@@ -22,7 +22,7 @@
       :key="chip.name"
     >
       {{chip.name}}
-      <span class="pointer" @click.prevent="deleteChip()">&times;</span>
+      <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
     </div>
     <div class="pointer text-warning ml-1 mt-1" @click.prevent="resetChips()">
       <p>clear filters</p>
@@ -39,11 +39,6 @@ export default {
       chips: []
     };
   },
-  computed: {
-    keeps() {
-      return this.$store.state.keeps;
-    }
-  },
   methods: {
     createChip() {
       const toast = swal.mixin({
@@ -57,14 +52,9 @@ export default {
       this.newChip = {};
     },
 
-    // deleteChip(chip) {
-    //   for (var c in this.chips) {
-    //     if (this.chips[c].name === chip.name) {
-    //       this.chips.splice(this.chips[c], 1);
-    //     }
-    //     console.log("deleted");
-    //   }
-    // },
+    deleteChip(chip) {
+      this.chips = this.chips.filter(c => c.name !== chip.name);
+    },
 
     resetChips() {
       this.chips = [];

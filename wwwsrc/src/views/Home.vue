@@ -32,7 +32,7 @@ export default {
   mounted() {
     this.$store.dispatch("getKeeps");
     this.$store.dispatch("getVaults");
-    this.scrollKeeps();
+    // this.scrollKeeps();
   },
   computed: {
     user() {
@@ -45,11 +45,11 @@ export default {
 
     vaults() {
       return this.$store.state.vaults;
-    },
-
-    keepCount() {
-      return 18;
     }
+
+    // keepCount() {
+    //   return 18;
+    // }
 
     // initialKeeps() {
     //   let scrollKeeps = [];
@@ -61,19 +61,26 @@ export default {
   },
   methods: {
     filterKeeps(name) {
-      console.log("new chip", name);
-    },
-    scrollKeeps() {
-      window.onscroll = () => {
-        let bottomOfWindow =
-          document.documentElement.scrollTop + window.innerHeight ===
-          document.documentElement.offsetHeight;
-
-        if (bottomOfWindow) {
-          console.log("scrolled!");
-        }
-      };
+      console.log("chip:", name);
+      console.log(
+        this.keeps.filter(
+          k =>
+            k.name.toLowerCase().includes(name) ||
+            k.description.toLowerCase().includes(name)
+        )
+      );
     }
+    // scrollKeeps() {
+    //   window.onscroll = () => {
+    //     let bottomOfWindow =
+    //       document.documentElement.scrollTop + window.innerHeight ===
+    //       document.documentElement.offsetHeight;
+
+    //     if (bottomOfWindow) {
+    //       console.log("scrolled!");
+    //     }
+    //   };
+    // }
   },
   components: {
     Keeps,
