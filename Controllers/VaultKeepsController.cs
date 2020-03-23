@@ -6,7 +6,7 @@ using Keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Keepr.Controllers
+namespace keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]

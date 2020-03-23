@@ -1,16 +1,16 @@
 <template>
   <div class="row">
-    <div class="col-2 text-left ml-2">
-      <form @submit.prevent="createChip">
+    <div class="col-3 text-left ml-2">
+      <form @submit="$emit('newChip', newChip.name)" @submit.prevent="createChip">
         <div class="input-group mb-3">
           <input
             type="text"
             class="form-control"
-            placeholder="sort keeps by..."
+            placeholder="filter by name or description..."
             v-model="newChip.name"
           />
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">add</button>
+            <button class="btn btn-primary" type="submit">add</button>
           </div>
         </div>
       </form>
@@ -22,7 +22,10 @@
       :key="chip.name"
     >
       {{chip.name}}
-      <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
+      <span class="pointer" @click.prevent="deleteChip()">&times;</span>
+    </div>
+    <div class="pointer text-warning ml-1 mt-1" @click.prevent="resetChips()">
+      <p>clear filters</p>
     </div>
   </div>
 </template>
@@ -36,7 +39,11 @@ export default {
       chips: []
     };
   },
-  computed: {},
+  computed: {
+    keeps() {
+      return this.$store.state.keeps;
+    }
+  },
   methods: {
     createChip() {
       const toast = swal.mixin({
@@ -45,20 +52,22 @@ export default {
         showConfirmButton: false,
         timer: 2000
       });
-      for (var c in this.chips) {
-        if (this.newChip.name === this.chips[c].name) {
-          toast.fire("chip already exists", "", "error");
-        }
-      }
       this.chips.push(this.newChip);
       toast.fire("", "", "success");
       this.newChip = {};
     },
 
-    deleteChip(chip) {
-      console.log(chip.name);
-      this.chips.splice(chip);
-      console.log("deleted");
+    // deleteChip(chip) {
+    //   for (var c in this.chips) {
+    //     if (this.chips[c].name === chip.name) {
+    //       this.chips.splice(this.chips[c], 1);
+    //     }
+    //     console.log("deleted");
+    //   }
+    // },
+
+    resetChips() {
+      this.chips = [];
     }
   }
 };
@@ -66,5 +75,8 @@ export default {
 <style>
 .pointer {
   cursor: pointer;
+}
+p {
+  font-size: 0.75rem;
 }
 </style>

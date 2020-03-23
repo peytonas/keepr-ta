@@ -15,7 +15,9 @@ namespace Keepr.Services
     }
     public Chip Create(Chip newChip, string userId)
     {
-      string Name = _repo.Create(newChip);
+      newChip.UserId = userId;
+      int id = _repo.Create(newChip);
+      newChip.Id = id;
       return newChip;
     }
 
@@ -24,18 +26,18 @@ namespace Keepr.Services
       return _repo.Get();
     }
 
-    public Chip Get(string name)
+    public Chip Get(int id)
     {
-      Chip exists = _repo.Get(name);
+      Chip exists = _repo.Get(id);
       if (exists == null) { throw new Exception("doesn't exist broh"); }
       return exists;
     }
 
-    public string Delete(string name)
+    public string Delete(int id, string userId)
     {
-      Chip exists = _repo.Get(name);
+      Chip exists = _repo.Get(id);
       if (exists == null) { throw new Exception("doesn't exist broh"); }
-      _repo.Delete(name);
+      _repo.Delete(id, userId);
       return "it's gone, Jim";
     }
   }

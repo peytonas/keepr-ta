@@ -13,14 +13,14 @@ namespace Keepr.Repositories
     {
       _db = db;
     }
-    public string Create(Chip newChip)
+    public int Create(Chip newChip)
     {
       string sql = @"
         INSERT INTO chips
-        (name)
+        (id, name, userId)
         VALUES
-        (@Name)";
-      return _db.ExecuteScalar<string>(sql, newChip);
+        (@Id, @Name, @UserId)";
+      return _db.ExecuteScalar<int>(sql, newChip);
     }
 
     public IEnumerable<Chip> Get()
@@ -29,16 +29,16 @@ namespace Keepr.Repositories
       return _db.Query<Chip>(sql);
     }
 
-    public Chip Get(string name)
+    public Chip Get(int id)
     {
-      string sql = "SELECT * FROM keeps WHERE name = @name";
-      return _db.QueryFirstOrDefault<Chip>(sql, new { name });
+      string sql = "SELECT * FROM keeps WHERE id = @id";
+      return _db.QueryFirstOrDefault<Chip>(sql, new { id });
     }
 
-    public void Delete(string name)
+    public void Delete(int id, string userId)
     {
-      string sql = "DELETE FROM keeps WHERE name = @name";
-      _db.Execute(sql, new { name });
+      string sql = "DELETE FROM keeps WHERE id = @id";
+      _db.Execute(sql, new { id, userId });
     }
   }
 }

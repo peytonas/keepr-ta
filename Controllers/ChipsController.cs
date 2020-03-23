@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace keepr.Controllers
+namespace Keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
@@ -17,6 +17,23 @@ namespace keepr.Controllers
     {
       _cs = cs;
     }
+
+    [Authorize]
+    [HttpPost]
+
+    public ActionResult<Chip> Create([FromBody] Chip newChip)
+    {
+      try
+      {
+        string id = HttpContext.User.FindFirstValue("Id");
+        return Ok(_cs.Create(newChip, id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
     [HttpGet]
     public ActionResult<IEnumerable<Chip>> Get()
     {
@@ -29,27 +46,13 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    [Authorize]
-    [HttpPost]
-    public ActionResult<Chip> Create([FromBody] Chip newChip)
-    {
-      try
-      {
-        string name = HttpContext.User.FindFirstValue("Name");
-        return Ok(_cs.Create(newChip, name));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
 
-    [HttpGet("{name}")]
-    public ActionResult<Keep> Get(string name)
+    [HttpGet("{id}")]
+    public ActionResult<Chip> Get(int id)
     {
       try
       {
-        return Ok(_cs.Get(name));
+        return Ok(_cs.Get(id));
       }
       catch (Exception e)
       {
@@ -58,13 +61,13 @@ namespace keepr.Controllers
     }
 
     [Authorize]
-    [HttpDelete("{name}")]
-    public ActionResult<string> Delete(string name)
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
     {
       try
       {
-        string userId = HttpContext.User.FindFirstValue("Name");
-        return Ok(_cs.Delete(name));
+        string userId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_cs.Delete(id, userId));
       }
       catch (Exception e)
       {
