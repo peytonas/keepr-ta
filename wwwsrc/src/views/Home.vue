@@ -69,12 +69,10 @@ export default {
   methods: {
     addChips(chip) {
       this.chips.push(chip);
-      console.log(this.chips);
     },
 
     deleteChip(chip) {
       this.chips = this.chips.filter(c => c !== chip.name);
-      console.log(this.chips);
     },
 
     resetChips() {
