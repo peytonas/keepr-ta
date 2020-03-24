@@ -75,9 +75,12 @@ export default {
       this.filterKeeps(chip);
     },
 
-    deleteChip(chip) {
-      this.filterKeeps("");
-      this.chips = this.chips.filter(c => c !== chip.name);
+    deleteChip(deletedChip) {
+      this.chips = this.chips.filter(c => c !== deletedChip.name);
+      this.filteredKeeps = [];
+      for (var chip in this.chips) {
+        this.filterKeeps(this.chips[chip]);
+      }
     },
 
     resetChips() {
@@ -86,14 +89,12 @@ export default {
     },
 
     filterKeeps(name) {
-      console.log("chip:", name);
       var filtered = this.keeps.filter(
         k =>
           k.name.toLowerCase().includes(name) ||
           k.description.toLowerCase().includes(name)
       );
       this.filteredKeeps = filtered;
-      console.log(filtered);
     }
     // scrollKeeps() {
     //   window.onscroll = () => {

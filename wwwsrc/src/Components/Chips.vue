@@ -25,7 +25,7 @@
       <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
     </div>
     <div class="pointer text-warning ml-1 mt-1" @click.prevent="resetChips()">
-      <p>clear filters</p>
+      <p v-if="this.chips.length > 0">clear filters</p>
     </div>
   </div>
 </template>
