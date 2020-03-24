@@ -31,7 +31,8 @@ export default {
   name: "home",
   data() {
     return {
-      chips: []
+      chips: [],
+      filteredKeeps: []
     };
   },
   mounted() {
@@ -45,10 +46,12 @@ export default {
     },
 
     keeps() {
-      return this.$store.state.keeps;
+      if (this.filteredKeeps.length > 0) {
+        return this.filteredKeeps;
+      } else {
+        return this.$store.state.keeps;
+      }
     },
-
-    filteredKeeps() {},
 
     vaults() {
       return this.$store.state.vaults;
@@ -69,24 +72,29 @@ export default {
   methods: {
     addChips(chip) {
       this.chips.push(chip);
+      this.filterKeeps(chip);
     },
 
     deleteChip(chip) {
+      this.filterKeeps("");
       this.chips = this.chips.filter(c => c !== chip.name);
     },
 
     resetChips() {
       this.chips = [];
-    }
+      this.filteredKeeps = [];
+    },
 
-    // filterKeeps(name) {
-    //   console.log("chip:", name);
-    //   this.keeps = this.keeps.filter(
-    //     k =>
-    //       k.name.toLowerCase().includes(name) ||
-    //       k.description.toLowerCase().includes(name)
-    //   );
-    // }
+    filterKeeps(name) {
+      console.log("chip:", name);
+      var filtered = this.keeps.filter(
+        k =>
+          k.name.toLowerCase().includes(name) ||
+          k.description.toLowerCase().includes(name)
+      );
+      this.filteredKeeps = filtered;
+      console.log(filtered);
+    }
     // scrollKeeps() {
     //   window.onscroll = () => {
     //     let bottomOfWindow =
