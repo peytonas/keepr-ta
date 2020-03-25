@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <Chips />
+    <Chips @newChip="addChips" @deleteChip="deleteChip" @resetChips="resetChips" />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
       <Keeps v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
     </div>
@@ -56,13 +56,27 @@ import CreateKeepModal from "../Components/CreateKeepModal";
 import CreateVaultModal from "../Components/CreateVaultModal";
 export default {
   name: "profile",
+  data() {
+    return {
+      chips: [],
+      filteredKeeps: []
+    };
+  },
+  mounted() {
+    this.$store.dispatch("getUserKeeps");
+    this.$store.dispatch("getVaults");
+  },
   computed: {
     user() {
       return this.$store.state.user;
     },
 
     userKeeps() {
-      return this.$store.state.userKeeps;
+      if (this.filteredKeeps.length > 0) {
+        return this.filteredKeeps;
+      } else {
+        return this.$store.state.userKeeps;
+      }
     },
 
     vaults() {
@@ -70,13 +84,36 @@ export default {
     }
   },
   methods: {
+    addChips(chip) {
+      this.chips.push(chip);
+      this.filterKeeps(chip);
+    },
+
+    deleteChip(deletedChip) {
+      this.chips = this.chips.filter(c => c !== deletedChip.name);
+      this.filteredKeeps = [];
+      for (var chip in this.chips) {
+        this.filterKeeps(this.chips[chip]);
+      }
+    },
+
+    resetChips() {
+      this.chips = [];
+      this.filteredKeeps = [];
+    },
+
+    filterKeeps(name) {
+      var filtered = this.userKeeps.filter(
+        k =>
+          k.name.toLowerCase().includes(name) ||
+          k.description.toLowerCase().includes(name)
+      );
+      this.filteredKeeps = filtered;
+    },
+
     goHome() {
       this.$router.push("/");
     }
-  },
-  mounted() {
-    this.$store.dispatch("getUserKeeps");
-    this.$store.dispatch("getVaults");
   },
   components: {
     Keeps,

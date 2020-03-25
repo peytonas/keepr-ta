@@ -20,7 +20,6 @@ export default new Vuex.Store({
     keep: {},
     keeps: [],
     userKeeps: [],
-    // chips: [],
     vault: {},
     vaults: [],
     vaultKeep: {},
@@ -42,9 +41,6 @@ export default new Vuex.Store({
     setUserKeeps(state, payload) {
       state.userKeeps = payload
     },
-    // setChips(state, payload) {
-    //   state.chips = payload
-    // },
     setVault(state, payload) {
       state.vault = payload
     },
@@ -137,40 +133,6 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-
-    // async createChip({ commit, dispatch }, payload) {
-    //   try {
-    //     await api.post("chips", payload)
-    //     dispatch("getChipByName", payload.id)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // },
-
-    // async getChips({ commit, dispatch }) {
-    //   try {
-    //     let res = await api.get(`chips`)
-    //     commit('setChips', res.data)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // },
-
-    // async getChipByName({ commit, dispatch }, id) {
-    //   try {
-    //     await api.get(`chips/${id}`)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // },
-
-    // async deleteChip({ commit, dispatch }, id) {
-    //   try {
-    //     await api.delete(`chips/${id}`)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // },
 
     async createVault({ commit, dispatch }, payload) {
       try {
