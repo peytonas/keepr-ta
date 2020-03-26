@@ -38,15 +38,34 @@ USE keepr2020;
 -- );
 
 -- CREATE TABLE tags (
---   tagName VARCHAR(20) NOT NULL,
---   PRIMARY KEY(tagName)
+--   id int NOT NULL AUTO_INCREMENT,
+--   name VARCHAR(20) NOT NULL,
+--   userId VARCHAR(255),
+--   PRIMARY KEY(id)
 -- );
 
 -- CREATE TABLE keepTags (
---   keepId int NOT NULL,
---   tagName VARCHAR(20) NOT NULL,
---   PRIMARY KEY(tagName)
--- );
+--     id int NOT NULL AUTO_INCREMENT,
+--     keepId int NOT NULL,
+--     tagId int NOT NULL,
+--     userId VARCHAR(255) NOT NULL,
+
+--     PRIMARY KEY (id),
+--     INDEX (keepId, tagId),
+--     INDEX (userId),
+
+--     FOREIGN KEY (userId)
+--         REFERENCES users(id)
+--         ON DELETE CASCADE,
+
+--     FOREIGN KEY (keepId)
+--         REFERENCES keeps(id)
+--         ON DELETE CASCADE,
+
+--     FOREIGN KEY (tagId)
+--         REFERENCES tags(id)
+--         ON DELETE CASCADE
+-- )
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -79,5 +98,7 @@ USE keepr2020;
 -- USE THIS TO CLEAN OUT YOUR DATABASE
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
+-- DROP TABLE IF EXISTS tags;
+-- DROP TABLE IF EXISTS keepTags;
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;
