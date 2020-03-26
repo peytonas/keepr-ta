@@ -37,12 +37,16 @@ USE keepr2020;
 --     PRIMARY KEY (id)
 -- );
 
--- CREATE TABLE chips (
---     id int NOT NULL AUTO_INCREMENT,
---     name VARCHAR(255) NOT NULL,
---     userId VARCHAR(255),
---     PRIMARY KEY (id)
--- );
+CREATE TABLE tags (
+  tagName VARCHAR(20) NOT NULL,
+  PRIMARY KEY(tagName)
+);
+
+CREATE TABLE keepTags (
+  keepId int NOT NULL,
+  tagName VARCHAR(20) NOT NULL,
+  PRIMARY KEY(tagName)
+);
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -76,5 +80,4 @@ USE keepr2020;
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;
--- DROP TABLE IF EXISTS chips;
 -- DROP TABLE IF EXISTS users;

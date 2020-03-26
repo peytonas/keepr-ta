@@ -88,11 +88,11 @@ export default {
       this.filteredKeeps = [];
     },
 
-    filterKeeps(name) {
+    filterKeeps(chipName) {
       var filtered = this.keeps.filter(
         k =>
-          k.name.toLowerCase().includes(name) ||
-          k.description.toLowerCase().includes(name)
+          k.name.toLowerCase().includes(chipName) ||
+          k.description.toLowerCase().includes(chipName)
       );
       this.filteredKeeps = filtered;
     }

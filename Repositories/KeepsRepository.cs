@@ -17,9 +17,9 @@ namespace Keepr.Repositories
     {
       string sql = @"
         INSERT INTO keeps
-        (id, name, description, userId, img, isPrivate, views, keeps, vaulted)
+        (id, name, description, userId, img, isPrivate, tags, views, keeps, vaulted)
         VALUES
-        (@Id, @Name, @Description, @UserId, @Img, @IsPrivate, @Views, @Keeps, @Vaulted)";
+        (@Id, @Name, @Description, @UserId, @Img, @IsPrivate, @Tags, @Views, @Keeps, @Vaulted)";
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
     public IEnumerable<Keep> Get()
