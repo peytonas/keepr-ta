@@ -37,17 +37,6 @@ USE keepr2020;
 --     PRIMARY KEY (id)
 -- );
 
-CREATE TABLE tags (
-  tagName VARCHAR(20) NOT NULL,
-  PRIMARY KEY(tagName)
-);
-
-CREATE TABLE keepTags (
-  keepId int NOT NULL,
-  tagName VARCHAR(20) NOT NULL,
-  PRIMARY KEY(tagName)
-);
-
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
 --     vaultId int NOT NULL,
@@ -79,5 +68,6 @@ CREATE TABLE keepTags (
 -- USE THIS TO CLEAN OUT YOUR DATABASE
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
+-- DROP TABLE IF EXISTS tags;
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;
