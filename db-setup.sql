@@ -36,6 +36,18 @@ USE keepr2020;
 --         ON DELETE CASCADE,  
 --     PRIMARY KEY (id)
 -- );
+
+CREATE TABLE tags (
+  tagName VARCHAR(20) NOT NULL,
+  PRIMARY KEY(tagName)
+);
+
+CREATE TABLE keepTags (
+  keepId int NOT NULL,
+  tagName VARCHAR(20) NOT NULL,
+  PRIMARY KEY(tagName)
+);
+
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
 --     vaultId int NOT NULL,
@@ -59,12 +71,12 @@ USE keepr2020;
 --         ON DELETE CASCADE
 -- )
 
--- -- USE THIS LINE FOR GET KEEPS BY VAULTID
+-- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- SELECT * FROM vaultkeeps vk
 -- INNER JOIN keeps k ON k.id = vk.keepId 
 -- WHERE (vaultId = @vaultId AND vk.userId = @userId)
 
----- USE THIS TO CLEAN OUT YOUR DATABASE
+-- USE THIS TO CLEAN OUT YOUR DATABASE
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;

@@ -64,6 +64,7 @@ export default new Vuex.Store({
         console.warn(e.message)
       }
     },
+
     async login({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Login(creds)
@@ -73,6 +74,7 @@ export default new Vuex.Store({
         console.warn(e.message)
       }
     },
+
     async logout({ commit, dispatch }) {
       try {
         let success = await AuthService.Logout()
@@ -83,6 +85,7 @@ export default new Vuex.Store({
         console.warn(e.message)
       }
     },
+
     async createKeep({ commit, dispatch }, payload) {
       try {
         await api.post("keeps", payload)
@@ -92,6 +95,25 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
+    async getKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get(`keeps`)
+        commit('setKeeps', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+    async getUserKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get(`keeps/user`)
+        commit('setUserKeeps', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
     async deleteKeep({ commit, dispatch }, keepId) {
       try {
         await api.delete(`keeps/${keepId}`)
@@ -101,6 +123,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async editKeep({ commit, dispatch }, payload) {
       try {
         await api.put(`keeps/` + payload.id, payload)
@@ -110,22 +133,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async getKeeps({ commit, dispatch }) {
-      try {
-        let res = await api.get(`keeps`)
-        commit('setKeeps', res.data)
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async getUserKeeps({ commit, dispatch }) {
-      try {
-        let res = await api.get(`keeps/user`)
-        commit('setUserKeeps', res.data)
-      } catch (error) {
-        console.error(error)
-      }
-    },
+
     async createVault({ commit, dispatch }, payload) {
       try {
         await api.post("vaults", payload)
@@ -134,6 +142,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async getVault({ commit, dispatch }, vaultId) {
       try {
         let res = await api.get(`vaults/${vaultId}`)
@@ -143,6 +152,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async getVaults({ commit, dispatch }) {
       try {
         let res = await api.get(`vaults`)
@@ -151,6 +161,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async getVaultKeeps({ commit, dispatch }, vaultId) {
       try {
         let res = await api.get(`vaultkeeps/${vaultId}`)
@@ -160,6 +171,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async deleteVault({ commit, dispatch }, vaultId) {
       try {
         await api.delete(`vaults/${vaultId}`)
@@ -168,6 +180,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async addToVault({ commit, dispatch }, payload) {
       try {
         await api.put('keeps/' + payload.id, payload)
@@ -177,6 +190,7 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
+
     async storeKeep({ commit, dispatch }, payload) {
       try {
         await api.post('vaultkeeps', payload)
@@ -186,6 +200,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
     async removeKeep({ commit, dispatch }, payload) {
       try {
         await api.put('vaultkeeps', payload)

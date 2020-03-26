@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Keepr.Interfaces;
+
 namespace Keepr.Models
 {
   public class Keep
@@ -8,6 +11,7 @@ namespace Keepr.Models
     public string UserId { get; set; }
     public string Img { get; set; }
     public bool IsPrivate { get; set; }
+    public List<Tag> Tags { get; set; }
     public int Views { get; set; }
     public int Keeps { get; set; }
     public bool Vaulted { get; set; }

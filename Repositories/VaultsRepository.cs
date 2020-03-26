@@ -13,7 +13,7 @@ namespace Keepr.Repositories
     {
       _db = db;
     }
-    public int Create(Vault newVault) //STUB CREATE VAULT WORKS
+    public int Create(Vault newVault)
     {
       string sql = @"
         INSERT INTO vaults
@@ -23,17 +23,17 @@ namespace Keepr.Repositories
         SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newVault);
     }
-    public IEnumerable<Vault> Get(string userId) //STUB GET VAULTS BY USER ID WORKS
+    public IEnumerable<Vault> Get(string userId)
     {
       string sql = "SELECT * FROM vaults WHERE userId = @userId";
       return _db.Query<Vault>(sql, new { userId });
     }
-    public Vault GetById(int vaultId) //STUB GET VAULT BY VAULT ID WORKS
+    public Vault GetById(int vaultId)
     {
       string sql = "SELECT * FROM vaults WHERE id = @vaultId";
       return _db.QueryFirstOrDefault<Vault>(sql, new { vaultId });
     }
-    public void Delete(int vaultId) //STUB DELETE VAULT WORKS
+    public void Delete(int vaultId)
     {
       string sql = "DELETE FROM vaults WHERE id = @vaultId";
       _db.Execute(sql, new { vaultId });

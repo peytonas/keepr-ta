@@ -1,16 +1,16 @@
 <template>
   <div class="row">
-    <div class="col-2 text-left ml-2">
-      <form @submit.prevent="createChip">
+    <div class="col-3 text-left ml-2">
+      <form @submit.prevent="checkCharacters(newChip.name)">
         <div class="input-group mb-3">
           <input
             type="text"
             class="form-control"
-            placeholder="sort keeps by..."
+            placeholder="filter by name or description..."
             v-model="newChip.name"
           />
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">add</button>
+            <button class="btn btn-primary" type="submit">add</button>
           </div>
         </div>
       </form>
@@ -22,7 +22,10 @@
       :key="chip.name"
     >
       {{chip.name}}
-      <span class="pointer" @click="deleteChip">&times;</span>
+      <span class="pointer" @click.prevent="deleteChip(chip)">&times;</span>
+    </div>
+    <div class="pointer text-warning ml-1 mt-1" @click.prevent="resetChips()">
+      <p v-if="this.chips.length > 0">clear filters</p>
     </div>
   </div>
 </template>
@@ -38,20 +41,43 @@ export default {
   },
   methods: {
     createChip() {
-      let money = document.getElementById("kaching");
       const toast = swal.mixin({
         toast: true,
         position: "top-end",
         showConfirmButton: false,
         timer: 2000
       });
+      this.$emit("newChip", this.newChip.name);
       this.chips.push(this.newChip);
-      money.play();
       toast.fire("", "", "success");
       this.newChip = {};
     },
-    deleteChip() {
-      console.log("deleted");
+
+    deleteChip(chip) {
+      this.$emit("deleteChip", chip);
+      this.chips = this.chips.filter(c => c.name !== chip.name);
+    },
+
+    resetChips() {
+      this.$emit("resetChips");
+      this.chips = [];
+    },
+
+    checkCharacters(chipName) {
+      const toast = swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000
+      });
+      var letterNumber = /^[0-9a-zA-Z]+$/;
+      if (chipName.match(letterNumber)) {
+        this.createChip();
+      } else {
+        this.newChip = {};
+        toast.fire("invalid character", "", "error");
+        return false;
+      }
     }
   }
 };
@@ -59,5 +85,8 @@ export default {
 <style>
 .pointer {
   cursor: pointer;
+}
+p {
+  font-size: 0.75rem;
 }
 </style>

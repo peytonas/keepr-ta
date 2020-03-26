@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace keepr2.Controllers
+namespace Keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
@@ -17,9 +17,11 @@ namespace keepr2.Controllers
     {
       _vs = vs;
     }
+
     [Authorize]
     [HttpPost]
-    public ActionResult<Vault> Create([FromBody] Vault newVault) //STUB CREATE VAULT WORKS
+
+    public ActionResult<Vault> Create([FromBody] Vault newVault)
     {
       try
       {
@@ -31,8 +33,9 @@ namespace keepr2.Controllers
         return BadRequest(e.Message);
       }
     }
+
     [HttpGet]
-    public ActionResult<IEnumerable<Vault>> GetByUser() //STUB GET VAULTS BY USER ID
+    public ActionResult<IEnumerable<Vault>> GetByUser()
     {
       try
       {
@@ -44,8 +47,9 @@ namespace keepr2.Controllers
         return BadRequest(e.Message);
       }
     }
+
     [HttpGet("{vaultId}")]
-    public ActionResult<Vault> Get(int vaultId, string userId) //STUB GET VAULT BY VAULT ID WORKS
+    public ActionResult<Vault> Get(int vaultId, string userId)
     {
       try
       {
@@ -57,9 +61,10 @@ namespace keepr2.Controllers
         return BadRequest(e.Message);
       }
     }
+
     [Authorize]
     [HttpDelete("{vaultId}")]
-    public ActionResult<string> Delete(int vaultId) //STUB DELETE WORKS
+    public ActionResult<string> Delete(int vaultId)
     {
       try
       {
