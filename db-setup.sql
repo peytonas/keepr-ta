@@ -37,16 +37,16 @@ USE keepr2020;
 --     PRIMARY KEY (id)
 -- );
 
-CREATE TABLE tags (
-  tagName VARCHAR(20) NOT NULL,
-  PRIMARY KEY(tagName)
-);
+-- CREATE TABLE tags (
+--   tagName VARCHAR(20) NOT NULL,
+--   PRIMARY KEY(tagName)
+-- );
 
-CREATE TABLE keepTags (
-  keepId int NOT NULL,
-  tagName VARCHAR(20) NOT NULL,
-  PRIMARY KEY(tagName)
-);
+-- CREATE TABLE keepTags (
+--   keepId int NOT NULL,
+--   tagName VARCHAR(20) NOT NULL,
+--   PRIMARY KEY(tagName)
+-- );
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
