@@ -42,7 +42,7 @@
     </div>
     <Chips @newChip="addChips" @deleteChip="deleteChip" @resetChips="resetChips" />
     <div class="row justify-content-around mt-2 mb-2 ml-n3 mr-2">
-      <Keeps v-for="keep in userKeeps" :keepProp="keep" :key="keep._id" />
+      <Keeps v-for="keep in gottenKeeps" :keepProp="keep" :key="keep._id" />
     </div>
   </div>
 </template>
@@ -59,12 +59,16 @@ export default {
   data() {
     return {
       chips: [],
-      filteredKeeps: []
+      filteredKeeps: [],
+      gottenKeeps: [],
+      keepCount: 18,
+      scrollCount: 0
     };
   },
   mounted() {
     this.$store.dispatch("getUserKeeps");
     this.$store.dispatch("getVaults");
+    this.scrollKeeps();
   },
   computed: {
     user() {
@@ -81,6 +85,12 @@ export default {
 
     vaults() {
       return this.$store.state.vaults;
+    },
+
+    initialKeeps() {
+      for (var i = 0; i <= this.keepCount; i++) {
+        this.gottenKeeps.push(this.keeps[i]);
+      }
     }
   },
   methods: {
@@ -109,6 +119,31 @@ export default {
           k.description.toLowerCase().includes(name)
       );
       this.filteredKeeps = filtered;
+    },
+
+    scrollKeeps() {
+      for (var i = this.scrollCount; i < this.keepCount; i++) {
+        this.gottenKeeps.push(this.$store.state.keeps[i]);
+      }
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          var difference = this.$store.state.keeps.length - this.keepCount;
+          if (difference < 18) {
+            console.log(difference);
+            this.keepCount += difference;
+            this.scrollCount += difference;
+            this.scrollKeeps();
+          }
+          this.keepCount += 18;
+          this.scrollCount += 18;
+          this.scrollKeeps();
+          console.log("scrolled!");
+        }
+      };
     },
 
     goHome() {
